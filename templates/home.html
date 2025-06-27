@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Control Panel</title>
+  <link rel="stylesheet" href="home.css">
+  <script>
+    function AddSystem() {
+      const popup = document.getElementById("add_system_popup");
+      popup.style.display = "flex";
+    }
+
+    window.onload = () => {
+      document.querySelector(".close-button").onclick = () => {
+        document.getElementById("add_system_popup").style.display = "none";
+      };
+    };
+  </script>
+</head>
+<body>
+  <nav>
+    <a href="http://10.4.119.62:5000/">Livestream</a>
+    <a href="http://127.0.0.1:5000/run">Take Images</a>
+    <a href="http://127.0.0.1:5000/setup">Setup</a>
+    <a href="http://127.0.0.22:5000/add_system">Add System</a>
+    <a href="#">Profile Icon</a>
+
+    <!-- New Login Button -->
+    <a href="login.html" class="login-button">Login</a>
+
+    <!-- Existing Add System Button -->
+    <button onclick="AddSystem()">+ Add System</button>
+  </nav>
+
+  <div id="add_system_popup" class="popup">
+    <div class="popup-content">
+      <span class="close-button">&times;</span>
+      <p>Name</p>
+      <input type="text" id="name" placeholder="Enter system name">
+    </div>
+  </div>
+</body>
+</html>

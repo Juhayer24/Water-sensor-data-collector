@@ -1,0 +1,143 @@
+/* General body styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  background: linear-gradient(to right, #eaf6ff, #ffffff);
+  color: #000;
+  min-height: 100vh;
+}
+
+/* Navigation bar */
+nav {
+  background-color: #ffffff;
+  padding: 16px 24px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+nav a {
+  text-decoration: none;
+  color: #000;
+  padding: 10px 14px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+nav a:hover {
+  background-color: #d1ebff;
+  color: #007acc;
+  box-shadow: 0 2px 6px rgba(0, 122, 204, 0.2);
+}
+
+nav button {
+  margin-left: auto;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #007acc, #005f99);
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 122, 204, 0.3);
+}
+
+nav button:hover {
+  background: linear-gradient(135deg, #005f99, #003d66);
+  box-shadow: 0 6px 15px rgba(0, 122, 204, 0.4);
+}
+
+/* Popup overlay */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Popup content */
+.popup-content {
+  background-color: #ffffff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+  min-width: 320px;
+  max-width: 90%;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.close-button {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.close-button:hover {
+  color: #007acc;
+}
+
+.popup-content p {
+  margin: 0 0 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.popup-content input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s;
+}
+
+.popup-content input:focus {
+  outline: none;
+  border-color: #007acc;
+  box-shadow: 0 0 5px rgba(0, 122, 204, 0.3);
+}
+/* Login button in nav */
+nav .login-button {
+  margin-left: auto;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #4CAF50, #388E3C);
+  color: #fff;
+  font-weight: bold;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+}
+
+nav .login-button:hover {
+  background: linear-gradient(135deg, #388E3C, #2E7D32);
+  box-shadow: 0 6px 15px rgba(76, 175, 80, 0.4);
+}

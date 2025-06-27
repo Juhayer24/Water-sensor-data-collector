@@ -1,0 +1,141 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="run.css">
+        <script>
+            
+            function Infinite(){
+                
+                let popup = window.open(
+                        'about:blank',
+                        "Error Message",
+                        'width=600,height=400,resizable=yes')
+
+                    popup.document.write('<h1>How often would you like pictures taken in hours (decimals accepted, but please be a nice value or ill cry)</h1>')
+                    
+                    let input_box = popup.document.createElement("input")
+                    input_box.type="text"
+                    input_box.id="hours"
+                    popup.document.body.appendChild(input_box)
+                    
+                    let button = popup.document.createElement("button");
+                    
+                    button.innerHTML = "Submit";
+                    
+                    button.onclick = function Submit_Infinite(){
+                        const element = document.getElementById('notice')
+                        element.innerHTML="<p>System Is In Use</p>"
+
+                        const frequency = parseFloat(popup.document.getElementById("hours").value)
+                        const duration = null
+                        popup.close()
+                            fetch("/start", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({duration, frequency})
+                        })
+                                        .then(response => response.text())
+                        .then(data => console.log("Response from server:", data))
+                        .catch(err => console.error("Error:", err));
+                }
+
+                    popup.document.body.appendChild(button);
+            }
+
+            function GetSystems(){
+                fetch("/get_systems")
+                .then(response => response.json())
+                .then(data => {
+                    const element = document.getElementById("system")
+                    system_arr = data["systems"]
+                    if (system_arr.length == 0){
+                        console.log("None")
+                        const option = document.createElement("option")
+                        option.value = null
+                        option.text = "Must Add System"
+                        element.appendChild(option)
+                        console.log("Done")
+                    }
+                    else{
+                        console.log(system_arr)
+                        console.log(system_arr.length)
+                        for (let i = 0; i < system_arr.length; i++){
+                            const option = document.createElement("option")
+                            option.value = data[i]
+                            option.text = data[i]
+                            element.appendChild(option)
+                        }
+                }
+            
+                })
+                
+            }
+
+
+
+            function GetVals(){
+                const element = document.getElementById('notice')
+                element.innerHTML="<p>System Is In Use</p>"
+                var duration = parseFloat(document.getElementById("duration").value)
+                var frequency = parseFloat(document.getElementById("frequency").value)
+                console.log(duration, frequency)
+                console.log(60 % frequency)
+                if(frequency >= .25 && 60 % frequency == 0){
+                    
+                    fetch("/start", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({duration, frequency})
+                    })
+                    
+                    .then(response => response.text())
+                    .then(data => console.log("Response from server:", data))
+                    .catch(err => console.error("Error:", err));
+                    element.innerHTML = "<p>System Is Free</p>"
+                }
+                else{
+                    let popup = window.open(
+                        'about:blank',
+                        "Error Message",
+                        'width=600,height=400,resizable=yes')
+
+                    popup.document.write('<h1>Please enter a value greater than .25 and divisable by 60</h1>')
+                }
+            }
+            
+            function Kill(){
+                fetch('/stop')
+                .then(response => response.text())
+                .then(data => console.log("Response from server:", data))
+                .catch(err => console.error("Error:", err));
+                const element = document.getElementById('notice')
+                element.innerHTML = "<p>System Is Free</p>"
+            }
+            
+            const systems = GetSystems()
+        </script>
+    </head>
+
+<body>
+    <p>Which system would you like to use?</p>
+    <select id="system">
+
+    <p>How many minutes would you like to take pictures for?</p>
+    <input type="text" id="duration">
+
+    <p>How many images would you like to take a minute?</p>
+    <a>Can be as high as 6 and can be decimal</a>
+    <input type="text" id="frequency">
+    <button onclick="Infinite()">Run Infinitely</button>
+    <button onclick="GetVals()">Start</button>
+    <button onclick="Kill()">Stop</button>
+    <p id="notice">System Is Free</p>
+    
+</body>
+
+
+
+</html>

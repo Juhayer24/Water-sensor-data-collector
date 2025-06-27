@@ -1,0 +1,71 @@
+/* General Body Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #eaf6ff, #ffffff);
+    color: #000;
+    padding: 40px;
+    margin: 0;
+}
+
+/* Paragraphs and Instructions */
+p, a {
+    font-size: 16px;
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+/* Container */
+#system,
+#duration,
+#frequency {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: border-color 0.3s;
+}
+
+#system:focus,
+#duration:focus,
+#frequency:focus {
+    outline: none;
+    border-color: #007acc;
+    box-shadow: 0 0 5px rgba(0, 122, 204, 0.3);
+}
+
+/* Buttons */
+button {
+    background: linear-gradient(135deg, #007acc, #005f99);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    margin-right: 10px;
+    margin-top: 10px;
+    box-shadow: 0 4px 12px rgba(0, 122, 204, 0.3);
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #005f99, #003d66);
+    box-shadow: 0 6px 15px rgba(0, 122, 204, 0.4);
+}
+
+/* Notice Styling */
+#notice {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #007acc;
+    font-size: 16px;
+    padding: 10px;
+    background-color: #f0faff;
+    border-left: 4px solid #007acc;
+    border-radius: 4px;
+    max-width: 400px;
+}

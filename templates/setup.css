@@ -1,0 +1,68 @@
+/* Basic Reset & Background */
+body {
+    margin: 0;
+    padding: 40px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #eaf6ff, #ffffff);
+    color: #222;
+    line-height: 1.6;
+}
+
+/* Title Section */
+#title {
+    background-color: #007acc;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 122, 204, 0.2);
+}
+
+#title p {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Paragraph before list */
+body > p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Ordered List */
+ol {
+    padding-left: 25px;
+    font-size: 17px;
+}
+
+ol li {
+    margin-bottom: 10px;
+}
+
+/* Descriptive Text */
+dd {
+    margin-left: 20px;
+    font-size: 15px;
+    color: #555;
+    background-color: #f0faff;
+    border-left: 4px solid #007acc;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+}
+
+/* Links */
+a {
+    color: #005f99;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #003d66;
+}
