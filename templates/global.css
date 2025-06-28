@@ -1,4 +1,4 @@
-/* General body styling */
+/* Global Body Style */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
@@ -7,12 +7,13 @@ body {
   min-height: 100vh;
 }
 
-/* Navigation bar */
+/* Navigation Bar */
 nav {
   background-color: #ffffff;
   padding: 16px 24px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   display: flex;
+  justify-content: space-between;  /* <-- ensures right alignment */
   gap: 18px;
   align-items: center;
   position: sticky;
@@ -35,25 +36,7 @@ nav a:hover {
   box-shadow: 0 2px 6px rgba(0, 122, 204, 0.2);
 }
 
-nav button {
-  margin-left: auto;
-  padding: 10px 16px;
-  background: linear-gradient(135deg, #007acc, #005f99);
-  color: #fff;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 122, 204, 0.3);
-}
-
-nav button:hover {
-  background: linear-gradient(135deg, #005f99, #003d66);
-  box-shadow: 0 6px 15px rgba(0, 122, 204, 0.4);
-}
-
-/* Popup overlay */
+/* Popup Overlay */
 .popup {
   display: none;
   position: fixed;
@@ -67,7 +50,6 @@ nav button:hover {
   animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Popup content */
 .popup-content {
   background-color: #ffffff;
   padding: 30px 40px;
@@ -124,20 +106,28 @@ nav button:hover {
   border-color: #007acc;
   box-shadow: 0 0 5px rgba(0, 122, 204, 0.3);
 }
-/* Login button in nav */
-nav .login-button {
+.nav-right {
   margin-left: auto;
-  padding: 10px 16px;
-  background: linear-gradient(135deg, #4CAF50, #388E3C);
-  color: #fff;
-  font-weight: bold;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
-nav .login-button:hover {
-  background: linear-gradient(135deg, #388E3C, #2E7D32);
-  box-shadow: 0 6px 15px rgba(76, 175, 80, 0.4);
+.nav-right button {
+  background: linear-gradient(135deg, #007acc, #005f99);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 122, 204, 0.3);
+  transition: background 0.3s ease;
 }
+
+.nav-right button:hover {
+  background: linear-gradient(135deg, #005f99, #003d66);
+}
+
+
+/* Shared Popup Style (Already included in your global.css) */

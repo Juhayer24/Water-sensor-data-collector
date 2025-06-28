@@ -1,42 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Control Panel</title>
-  <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="global.css">
   <script>
-    function AddSystem() {
-      const popup = document.getElementById("add_system_popup");
-      popup.style.display = "flex";
+    function togglePopup() {
+      document.getElementById("add_system_popup").style.display = "flex";
+      document.getElementById("systemNameInput").focus();
     }
 
-    window.onload = () => {
-      document.querySelector(".close-button").onclick = () => {
-        document.getElementById("add_system_popup").style.display = "none";
-      };
-    };
+    function closePopup() {
+      document.getElementById("add_system_popup").style.display = "none";
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const input = document.getElementById("systemNameInput");
+      if (input) {
+        input.addEventListener("keydown", async function (event) {
+          if (event.key === "Enter") {
+            const systemName = input.value.trim();
+            if (systemName === "") return;
+
+            try {
+              const response = await fetch("/add_system", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ system_name: systemName })
+              });
+
+              if (response.ok) {
+                alert(`System "${systemName}" added.`);
+                input.value = "";
+                closePopup();
+              } else {
+                alert("Failed to add system.");
+              }
+            } catch (err) {
+              console.error("Error:", err);
+              alert("Error adding system.");
+            }
+          }
+        });
+      }
+    });
   </script>
 </head>
 <body>
+
   <nav>
-    <a href="http://10.4.119.62:5000/">Livestream</a>
-    <a href="http://127.0.0.1:5000/run">Take Images</a>
-    <a href="http://127.0.0.1:5000/setup">Setup</a>
-    <a href="http://127.0.0.22:5000/add_system">Add System</a>
-    <a href="#">Profile Icon</a>
+    <div class="nav-left">
+      <a href="home.html">Home</a>
+      <a href="run.html">Take Images</a>
+      <a href="#">Profile</a>
+    </div>
 
-    <!-- New Login Button -->
-    <a href="login.html" class="login-button">Login</a>
-
-    <!-- Existing Add System Button -->
-    <button onclick="AddSystem()">+ Add System</button>
+    <div class="nav-right">
+      <button onclick="togglePopup()">+ Add System</button>
+    </div>
   </nav>
 
+  <!-- Add System Popup -->
   <div id="add_system_popup" class="popup">
     <div class="popup-content">
-      <span class="close-button">&times;</span>
-      <p>Name</p>
-      <input type="text" id="name" placeholder="Enter system name">
+      <span class="close-button" onclick="closePopup()">&times;</span>
+      <p>Enter System Name</p>
+      <input type="text" id="systemNameInput" placeholder="e.g. Camera_1">
     </div>
   </div>
+
 </body>
 </html>
