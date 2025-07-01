@@ -27,3 +27,119 @@
   gap: 10px;
   flex-wrap: wrap;
 }
+
+.button-row button {
+  background: linear-gradient(135deg, #007acc, #005f99);
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 1.08em;
+  font-weight: 600;
+  box-shadow: 0 4px 16px rgba(0, 122, 204, 0.13);
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.button-row button:hover {
+  background: linear-gradient(135deg, #005f99, #003d66);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(0, 122, 204, 0.18);
+}
+
+.button-row button:active {
+  background: linear-gradient(135deg, #007acc, #005f99);
+  transform: scale(0.98);
+}
+
+.input-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.input-group {
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 4px;
+  color: #007acc;
+  font-weight: 500;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 15px;
+  border: 1px solid #b3d8f7;
+  border-radius: 6px;
+  transition: border-color 0.3s;
+  background: #f7fbff;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #007acc;
+  box-shadow: 0 0 5px rgba(0, 122, 204, 0.2);
+}
+
+.picture-count-row {
+  margin-top: 10px;
+  margin-bottom: 18px;
+  text-align: right;
+  color: #005f99;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.refresh-btn {
+  background: linear-gradient(135deg, #eaf6ff, #b3d8f7);
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  padding: 6px 12px;
+  cursor: pointer;
+  color: #007acc;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 122, 204, 0.08);
+}
+
+.refresh-btn:hover {
+  background: linear-gradient(135deg, #d1ebff, #b3d8f7);
+  color: #005f99;
+  box-shadow: 0 4px 16px rgba(0, 122, 204, 0.13);
+}
+
+.add-system-btn {
+  margin-top: 12px;
+  background: linear-gradient(135deg, #007acc, #005f99);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 122, 204, 0.2);
+  transition: background 0.3s ease;
+  width: 100%;
+}
+
+.add-system-btn:hover {
+  background: linear-gradient(135deg, #005f99, #003d66);
+}
+
+select#system {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #b3d8f7;
+  background: #f7fbff;
+  color: #005f99;
+  font-size: 15px;
+  min-width: 160px;
+}

@@ -9,7 +9,7 @@
       const username = document.getElementById("username").value;
       const password = document.getElementById("password").value;
 
-      const response = await fetch("/authenticate", {
+      const response = await fetch("http://127.0.0.1:5000/authenticate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
@@ -18,6 +18,8 @@
       const data = await response.json();
 
       if (data.success) {
+        // Save username to localStorage for profile page
+        localStorage.setItem("currentUser", username);
         window.location.href = data.redirect;
       } else {
         alert(data.message || 'Login failed');
@@ -39,6 +41,10 @@
         <input type="password" id="password" placeholder="Enter your password">
 
         <button onclick="GetVals()">Login</button>
+        <p class="signup-link">
+          Don't have an account?
+          <a href="signup.html">Sign up here</a>
+        </p>
       </div>
     </div>
   </div>
