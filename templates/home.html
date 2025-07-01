@@ -23,7 +23,7 @@
             if (systemName === "") return;
 
             try {
-              const response = await fetch("/add_system", {
+              const response = await fetch("http://127.0.0.1:5000/add_system", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ system_name: systemName })
@@ -33,6 +33,7 @@
                 alert(`System "${systemName}" added.`);
                 input.value = "";
                 closePopup();
+                window.location.href = "run.html"; // Redirect to run page after adding system
               } else {
                 alert("Failed to add system.");
               }

@@ -80,7 +80,7 @@
     }
 
     function GetSystems() {
-      fetch("/get_systems")
+      fetch("http://127.0.0.1:5000/get_systems")
         .then(response => response.json())
         .then(data => {
           const element = document.getElementById("system");
