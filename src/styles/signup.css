@@ -1,0 +1,12 @@
+/* Inherit layout from login.css for consistent sizing */
+@import url('./login.css');
+
+.signup-link {
+  text-align: center;
+  margin-top: 18px;
+}
+.signup-link a {
+  color: #007acc;
+  text-decoration: underline;
+  font-weight: 500;
+}
