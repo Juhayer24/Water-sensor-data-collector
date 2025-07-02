@@ -68,6 +68,28 @@ function Home() {
               ref={systemNameInput}
               onKeyDown={handleKeyDown}
             />
+            <button className="add-system-btn" onClick={async () => {
+              const systemName = systemNameInput.current.value.trim();
+              if (systemName === '') return;
+              try {
+                const response = await fetch('http://127.0.0.1:5000/add_system', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ system_name: systemName }),
+                });
+                if (response.ok) {
+                  alert(`System "${systemName}" added.`);
+                  systemNameInput.current.value = '';
+                  setShowPopup(false);
+                  window.location.href = '/run';
+                } else {
+                  alert('Failed to add system.');
+                }
+              } catch (err) {
+                console.error('Error:', err);
+                alert('Error adding system.');
+              }
+            }}>Add System</button>
           </div>
         </div>
       )}
