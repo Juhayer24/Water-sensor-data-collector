@@ -5,7 +5,9 @@ import '../styles/global.css'; // Make sure your CSS is moved to this folder
 
 function Home() {
   const [showPopup, setShowPopup] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const systemNameInput = useRef(null);
+  const username = localStorage.getItem('currentUser');
 
   useEffect(() => {
     if (showPopup && systemNameInput.current) {
@@ -16,7 +18,7 @@ function Home() {
   const handleKeyDown = async (event) => {
     if (event.key === 'Enter') {
       const systemName = systemNameInput.current.value.trim();
-      if (systemName === '') return;
+      if (systemName === '' || !username) return;
 
       try {
         const response = await fetch('http://127.0.0.1:5000/add_system', {
@@ -24,7 +26,7 @@ function Home() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ system_name: systemName }),
+          body: JSON.stringify({ system_name: systemName, username }),
         });
 
         if (response.ok) {
@@ -42,10 +44,23 @@ function Home() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('currentUser');
+    window.location.href = '/login';
+  };
+
   return (
     <div>
-      <nav>
-        <div className="nav-left">
+      <nav style={{ position: 'relative' }}>
+        <button className="nav-hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
+          &#9776;
+        </button>
+        {menuOpen && (
+          <div className="nav-dropdown">
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+        )}
+        <div className="nav-center">
           <a href="/home">Home</a>
           <a href="/run">Take Images</a>
           <a href="/profile">Profile</a>
@@ -70,12 +85,12 @@ function Home() {
             />
             <button className="add-system-btn" onClick={async () => {
               const systemName = systemNameInput.current.value.trim();
-              if (systemName === '') return;
+              if (systemName === '' || !username) return;
               try {
                 const response = await fetch('http://127.0.0.1:5000/add_system', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ system_name: systemName }),
+                  body: JSON.stringify({ system_name: systemName, username }),
                 });
                 if (response.ok) {
                   alert(`System "${systemName}" added.`);

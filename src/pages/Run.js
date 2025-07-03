@@ -11,12 +11,15 @@ function Run() {
   const [frequency, setFrequency] = useState('');
   const [pictureCount, setPictureCount] = useState(0);
   const [notice, setNotice] = useState('System Is Free');
+  const [menuOpen, setMenuOpen] = useState(false);
+  const username = localStorage.getItem('currentUser');
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/get_systems")
+    if (!username) return;
+    fetch(`http://127.0.0.1:5000/get_systems?username=${encodeURIComponent(username)}`)
       .then((res) => res.json())
       .then((data) => setSystems(data.systems || []));
-  }, []);
+  }, [username]);
 
   useEffect(() => {
     if (popupVisible && systemNameInputRef.current) {
@@ -40,7 +43,7 @@ function Run() {
     const response = await fetch("http://127.0.0.1:5000/add_system", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ system_name: name })
+      body: JSON.stringify({ system_name: name, username })
     });
     if (response.ok) {
       alert(`System "${name}" added.`);
@@ -52,8 +55,16 @@ function Run() {
   };
 
   const deleteAll = () => {
-    fetch("http://127.0.0.1:5000/delete_all_systems", { method: "POST" })
-      .then(res => res.ok && setSystems([]));
+    fetch("http://127.0.0.1:5000/delete_all_systems", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username })
+    })
+      .then(res => {
+        if (res.ok) {
+          setSystems([]);
+        }
+      });
   };
 
   const start = (inf = false) => {
@@ -75,10 +86,23 @@ function Run() {
     setNotice("System Is Free");
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('currentUser');
+    window.location.href = '/login';
+  };
+
   return (
     <div>
-      <nav>
-        <div className="nav-left">
+      <nav style={{ position: 'relative' }}>
+        <button className="nav-hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
+          &#9776;
+        </button>
+        {menuOpen && (
+          <div className="nav-dropdown">
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+        )}
+        <div className="nav-center">
           <a href="/home">Home</a>
           <a href="/run">Take Images</a>
           <a href="/profile">Profile</a>

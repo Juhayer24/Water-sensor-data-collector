@@ -1,24 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;700&display=swap');
+
 /* Global Body Style */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  background: linear-gradient(to right, #eaf6ff, #ffffff);
+  background: linear-gradient(120deg, #eaf6ff 0%, #f7e8ff 100%);
   color: #000;
   min-height: 100vh;
+  transition: background 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: bodyFadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes bodyFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  letter-spacing: 1px;
+  font-weight: 700;
+  color: #007acc;
+  animation: titlePopIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes titlePopIn {
+  0% { opacity: 0; transform: scale(0.95) translateY(20px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 /* Navigation Bar */
 nav {
   background-color: #ffffff;
-  padding: 16px 24px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  padding: 34px 24px;
+  box-shadow: 0 8px 32px rgba(0, 122, 204, 0.08);
   display: flex;
-  justify-content: space-between;  /* <-- ensures right alignment */
-  gap: 18px;
   align-items: center;
   position: sticky;
   top: 0;
   z-index: 100;
+  justify-content: center;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(6px);
+  animation: navSlideDown 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes navSlideDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.nav-hamburger {
+  position: absolute;
+  left: 24px;
+  top: 16px;
+  font-size: 2em;
+  cursor: pointer;
+  background: none;
+  border: none;
+  z-index: 101;
+  color: #007acc;
+  transition: color 0.2s;
+}
+
+.nav-hamburger:hover {
+  color: #005f99;
+}
+
+.nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-dropdown {
+  position: absolute;
+  left: 24px;
+  top: 56px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+  min-width: 140px;
+  padding: 10px 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.2s;
+}
+
+.nav-dropdown button, .nav-dropdown a {
+  background: none;
+  border: none;
+  color: #007acc;
+  text-align: left;
+  padding: 10px 18px;
+  font-size: 1em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-dropdown button:hover, .nav-dropdown a:hover {
+  background: #eaf6ff;
+  color: #005f99;
 }
 
 nav a {
@@ -28,12 +116,28 @@ nav a {
   border-radius: 6px;
   transition: all 0.3s ease;
   font-weight: 500;
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
 }
 
-nav a:hover {
-  background-color: #d1ebff;
-  color: #007acc;
-  box-shadow: 0 2px 6px rgba(0, 122, 204, 0.2);
+nav a::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #007acc, #b36aff);
+  transition: width 0.3s, left 0.3s;
+}
+
+nav a:hover::after {
+  width: 100%;
+  left: 0;
 }
 
 /* Popup Overlay */
@@ -58,7 +162,7 @@ nav a:hover {
   position: relative;
   min-width: 320px;
   max-width: 90%;
-  animation: slideUp 0.3s ease-out;
+  animation: slideUp 0.3s ease-out, popupAppear 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes fadeIn {
@@ -69,6 +173,11 @@ nav a:hover {
 @keyframes slideUp {
   from { transform: translateY(30px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes popupAppear {
+  from { opacity: 0; transform: scale(0.95) translateY(30px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 .close-button {
@@ -106,8 +215,11 @@ nav a:hover {
   border-color: #007acc;
   box-shadow: 0 0 5px rgba(0, 122, 204, 0.3);
 }
+
 .nav-right {
-  margin-left: auto;
+  position: absolute;
+  right: 24px;
+  top: 16px;
   display: flex;
   gap: 12px;
   align-items: center;
@@ -123,9 +235,36 @@ nav a:hover {
   font-weight: bold;
   box-shadow: 0 4px 10px rgba(0, 122, 204, 0.3);
   transition: background 0.3s ease;
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .nav-right button:hover {
   background: linear-gradient(135deg, #005f99, #003d66);
+}
+
+.button-row button, .nav-right button, .add-system-btn {
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 0 6px 24px rgba(0, 122, 204, 0.13);
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+  animation: buttonFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes buttonFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+input, select {
+  font-family: 'Inter', 'Montserrat', sans-serif;
+  font-size: 1em;
+  transition: box-shadow 0.3s;
+}
+
+input:focus, select:focus {
+  box-shadow: 0 0 8px #b36aff33;
 }
 

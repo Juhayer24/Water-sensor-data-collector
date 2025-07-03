@@ -15,16 +15,20 @@ users_col = db["users"]
 def add_system():
     data = request.get_json()
     system_name = data.get('system_name')
-    if not system_name:
-        return jsonify({'success': False, 'message': 'System name required'}), 400
-    if systems_col.find_one({'name': system_name}):
+    username = data.get('username')
+    if not system_name or not username:
+        return jsonify({'success': False, 'message': 'System name and username required'}), 400
+    if systems_col.find_one({'name': system_name, 'username': username}):
         return jsonify({'success': False, 'message': 'Duplicate system name'}), 400
-    systems_col.insert_one({'name': system_name})
+    systems_col.insert_one({'name': system_name, 'username': username})
     return jsonify({'success': True, 'message': 'System added'}), 200
 
 @app.route('/get_systems', methods=['GET'])
 def get_systems():
-    systems = [s['name'] for s in systems_col.find()]
+    username = request.args.get('username')
+    if not username:
+        return jsonify({'systems': []})
+    systems = [s['name'] for s in systems_col.find({'username': username})]
     return jsonify({'systems': systems})
 
 @app.route('/signup', methods=['POST'])
@@ -59,6 +63,15 @@ def profile():
         return jsonify({'success': True, 'user': {'username': user['username'], 'email': user['email']}})
     else:
         return jsonify({'success': False, 'message': 'User not found'}), 404
+
+@app.route('/delete_all_systems', methods=['POST'])
+def delete_all_systems():
+    data = request.get_json()
+    username = data.get('username')
+    if not username:
+        return jsonify({'success': False, 'message': 'Username required'}), 400
+    systems_col.delete_many({'username': username})
+    return jsonify({'success': True, 'message': 'All systems deleted'})
 
 if __name__ == '__main__':
     app.run(debug=True)
