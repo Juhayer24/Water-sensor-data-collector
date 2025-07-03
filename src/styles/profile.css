@@ -39,3 +39,67 @@
   font-weight: 600;
   margin-right: 8px;
 }
+
+/* Profile Photo Styles */
+.profile-photo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.profile-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 16px rgba(179, 106, 255, 0.13);
+  border: 4px solid #eaf6ff;
+  background: #f7e8ff;
+  margin-bottom: 12px;
+  transition: opacity 0.3s;
+}
+
+.profile-photo.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #eaf6ff 60%, #f7e8ff 100%);
+  box-shadow: 0 4px 16px rgba(179, 106, 255, 0.13);
+  border: 4px solid #eaf6ff;
+  margin-bottom: 12px;
+}
+
+.photo-btn-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.upload-photo-btn, .remove-photo-btn {
+  background: linear-gradient(135deg, #b36aff, #007acc);
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 122, 204, 0.10);
+  transition: background 0.3s, opacity 0.2s;
+  font-size: 1em;
+}
+
+.upload-photo-btn:disabled, .remove-photo-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.remove-photo-btn {
+  background: linear-gradient(135deg, #ff6a6a, #b36aff);
+}
