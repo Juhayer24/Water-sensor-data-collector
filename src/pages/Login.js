@@ -1,14 +1,19 @@
 // src/pages/Login.js
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/login.css'; // Ensure this CSS is in src/styles
+import {useAuth} from "../Authentication"
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+  const { login } = useAuth()
+  const navigate = useNavigate()
+  
   const handleLogin = async () => {
     try {
+
       const response = await fetch('http://127.0.0.1:5000/authenticate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -18,8 +23,14 @@ function Login() {
       const data = await response.json();
 
       if (data.success) {
+        const user = {user: username}
+        login(user)
+        console.log(user)
+
         localStorage.setItem('currentUser', username);
-        window.location.href = data.redirect; // or use navigate() with React Router
+        
+        navigate(data.redirect || '/profile')
+        //window.location.href = data.redirect; // or use navigate() with React Router
       } else {
         alert(data.message || 'Login failed');
       }

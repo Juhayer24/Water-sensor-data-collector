@@ -7,6 +7,7 @@ import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Run from "./pages/Run";
+import ProtectedRoute from "./Protect_Route";
 
 import "./styles/global.css"; // Add any global styles here
 
@@ -17,9 +18,21 @@ function App() {
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/run" element={<Run />} />
+        <Route path="/home" element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>} />
+
+        <Route path="/profile" element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>} />
+
+        <Route path="/run" element={
+          <ProtectedRoute>
+            <Run />
+          </ProtectedRoute>} />
+        
         <Route path="*" element={<h2>404 Not Found</h2>} />
       </Routes>
     </Router>
