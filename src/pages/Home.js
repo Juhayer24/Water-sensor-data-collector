@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import '../styles/global.css'; // Make sure your CSS is moved to this folder
+import '../styles/home.css';
 
 function Home() {
   const [showPopup, setShowPopup] = useState(false);
@@ -70,6 +71,53 @@ function Home() {
         </div>
       </nav>
 
+      {/* Title and Start Button */}
+      <div style={{
+        display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 36, marginBottom: 32
+      }}>
+        <h1 style={{
+          fontFamily: "'Montserrat', 'Inter', 'Poppins', 'Segoe UI', sans-serif",
+          fontWeight: 900,
+          fontSize: '2.7em',
+          letterSpacing: '2px',
+          color: '#007acc',
+          textShadow: '0 2px 18px #eaf6ff',
+          marginBottom: 18,
+          background: 'linear-gradient(90deg, #007acc 40%, #00c6fb 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+        }}>
+          Real Time Sensor Data
+        </h1>
+        <a href="/run" style={{ textDecoration: 'none' }}>
+          <button
+            style={{
+              background: 'linear-gradient(135deg, #007acc 60%, #00c6fb 100%)',
+              color: '#fff',
+              fontFamily: "'Montserrat', 'Inter', 'Poppins', 'Segoe UI', sans-serif",
+              fontWeight: 800,
+              fontSize: '1.3em',
+              padding: '18px 44px',
+              borderRadius: 14,
+              border: 'none',
+              boxShadow: '0 8px 32px rgba(0, 122, 204, 0.18)',
+              letterSpacing: '1.2px',
+              cursor: 'pointer',
+              marginTop: 8,
+              marginBottom: 8,
+              transition: 'background 0.3s, transform 0.2s, box-shadow 0.2s',
+              outline: 'none',
+              animation: 'buttonFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
+            }}
+            onMouseOver={e => e.currentTarget.style.background = 'linear-gradient(135deg, #005f99 60%, #007acc 100%)'}
+            onMouseOut={e => e.currentTarget.style.background = 'linear-gradient(135deg, #007acc 60%, #00c6fb 100%)'}
+          >
+            Start Taking Images
+          </button>
+        </a>
+      </div>
+
       {/* Add System Popup */}
       {showPopup && (
         <div id="add_system_popup" className="popup" style={{ display: 'flex' }}>
@@ -108,6 +156,28 @@ function Home() {
           </div>
         </div>
       )}
+
+      {/* Animated Tech Logos Bar */}
+      <div className="tech-logos-bar">
+        <div className="tech-logos-track">
+          <img className="tech-logo" src="/logos/r.png" alt="Raspberry Pi" title="Raspberry Pi" />
+          <img className="tech-logo" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React.js" title="React.js" />
+          <img className="tech-logo" src="https://upload.wikimedia.org/wikipedia/commons/9/93/MongoDB_Logo.svg" alt="MongoDB" title="MongoDB" />
+          <img className="tech-logo" src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python" title="Python" />
+          <img className="tech-logo" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" title="GitHub" />
+          <img className="tech-logo" src="/logos/howell.png" alt="Howells Lab" title="Howells Lab" />
+          <img className="tech-logo" src="/logos/Umaine.png" alt="University of Maine" title="University of Maine" />
+          <img className="tech-logo" src="/logos/Ankit.png" alt="Ankits Lab" title="Ankits Lab" />
+          <img className="tech-logo" src="/logos/r.png" alt="Raspberry Pi" />
+          <img className="tech-logo" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React.js" />
+          <img className="tech-logo" src="https://upload.wikimedia.org/wikipedia/commons/9/93/MongoDB_Logo.svg" alt="MongoDB" />
+          <img className="tech-logo" src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python" />
+          <img className="tech-logo" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" />
+          <img className="tech-logo" src="/logos/howell.png" alt="Howells Lab" />
+          <img className="tech-logo" src="/logos/Umaine.png" alt="University of Maine" />
+          <img className="tech-logo" src="/logos/Ankit.png" alt="Ankits Lab" />
+        </div>
+      </div>
     </div>
   );
 }
