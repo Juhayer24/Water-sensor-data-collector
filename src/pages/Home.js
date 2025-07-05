@@ -50,6 +50,18 @@ function Home() {
     window.location.href = '/login';
   };
 
+  // Define the logos array (use your actual logo paths)
+  const logos = [
+    '/logos/r.png',
+    'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+    'https://upload.wikimedia.org/wikipedia/commons/9/93/MongoDB_Logo.svg',
+    'https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg',
+    'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png',
+    '/logos/howell.png',
+    '/logos/Umaine.png',
+    '/logos/Ankit.png',
+  ];
+
   return (
     <div>
       <nav style={{ position: 'relative' }}>
@@ -160,22 +172,9 @@ function Home() {
       {/* Animated Tech Logos Bar */}
       <div className="tech-logos-bar">
         <div className="tech-logos-track">
-          <img className="tech-logo" src="/logos/r.png" alt="Raspberry Pi" title="Raspberry Pi" />
-          <img className="tech-logo" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React.js" title="React.js" />
-          <img className="tech-logo" src="https://upload.wikimedia.org/wikipedia/commons/9/93/MongoDB_Logo.svg" alt="MongoDB" title="MongoDB" />
-          <img className="tech-logo" src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python" title="Python" />
-          <img className="tech-logo" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" title="GitHub" />
-          <img className="tech-logo" src="/logos/howell.png" alt="Howells Lab" title="Howells Lab" />
-          <img className="tech-logo" src="/logos/Umaine.png" alt="University of Maine" title="University of Maine" />
-          <img className="tech-logo" src="/logos/Ankit.png" alt="Ankits Lab" title="Ankits Lab" />
-          <img className="tech-logo" src="/logos/r.png" alt="Raspberry Pi" />
-          <img className="tech-logo" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React.js" />
-          <img className="tech-logo" src="https://upload.wikimedia.org/wikipedia/commons/9/93/MongoDB_Logo.svg" alt="MongoDB" />
-          <img className="tech-logo" src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python" />
-          <img className="tech-logo" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" />
-          <img className="tech-logo" src="/logos/howell.png" alt="Howells Lab" />
-          <img className="tech-logo" src="/logos/Umaine.png" alt="University of Maine" />
-          <img className="tech-logo" src="/logos/Ankit.png" alt="Ankits Lab" />
+          {[...logos, ...logos].map((logo, index) => (
+            <img key={index} src={logo} alt={`Logo ${index % logos.length}`} className="logo" />
+          ))}
         </div>
       </div>
     </div>
