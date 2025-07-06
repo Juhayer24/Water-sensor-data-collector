@@ -16,15 +16,15 @@
 .tech-logos-track {
   display: flex;
   align-items: center;
-  gap: 100px;
+  gap: 200px;
   width: calc(200%);
-  animation: scroll 20s linear infinite;
+  animation: scroll 50s linear infinite;
 }
 
 .logo {
   width: 100px;
   height: auto;
-  margin: 0 20px;
+  margin: 0 68px;
   flex-shrink: 0;
 }
 

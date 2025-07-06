@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../styles/global.css'; // Make sure your CSS is moved to this folder
 import '../styles/home.css';
+import Marquee from "react-fast-marquee";
 
 function Home() {
   const [showPopup, setShowPopup] = useState(false);
@@ -169,13 +170,13 @@ function Home() {
         </div>
       )}
 
-      {/* Animated Tech Logos Bar */}
+      {/* Animated Tech Logos Bar using react-fast-marquee */}
       <div className="tech-logos-bar">
-        <div className="tech-logos-track">
-          {[...logos, ...logos].map((logo, index) => (
+        <Marquee gradient={false} speed={40} pauseOnHover={true}>
+          {logos.map((logo, index) => (
             <img key={index} src={logo} alt={`Logo ${index % logos.length}`} className="logo" />
           ))}
-        </div>
+        </Marquee>
       </div>
     </div>
   );
