@@ -172,7 +172,7 @@ function Home() {
 
       {/* Animated Tech Logos Bar using react-fast-marquee */}
       <div className="tech-logos-bar">
-        <Marquee gradient={false} speed={40} pauseOnHover={true}>
+        <Marquee gradient={false} speed={80} pauseOnHover={true}>
           {logos.map((logo, index) => (
             <img key={index} src={logo} alt={`Logo ${index % logos.length}`} className="logo" />
           ))}
