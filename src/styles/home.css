@@ -1,0 +1,43 @@
+/* Animated tech logos bar for Home page */
+.tech-logos-bar {
+  position: relative;
+  width: 100vw;
+  max-width: 100%;
+  overflow: hidden;
+  margin-top: 18px;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  min-height: 70px;
+}
+
+.tech-logos-track {
+  display: flex;
+  align-items: center;
+  gap: 200px;
+  width: calc(200%);
+  animation: scroll 20s linear infinite;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+  margin: 0 68px;
+  flex-shrink: 0;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 700px) {
+  .tech-logo { height: 36px; padding: 3px 6px; }
+  .tech-logos-track { gap: 32px; }
+}
