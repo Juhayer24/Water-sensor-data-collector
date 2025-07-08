@@ -1,17 +1,31 @@
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from pymongo import MongoClient
+from flask_mail import Mail, Message
+from dotenv import load_dotenv
 from werkzeug.utils import secure_filename
 import os
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 
-# Replace with your MongoDB URI if using Atlas
+# MongoDB setup
 client = MongoClient("mongodb://localhost:27017")
 db = client["mydb"]
 systems_col = db["systems"]
 users_col = db["users"]
+
+# Email configuration
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USERNAME'] = os.getenv('EMAIL_USER')
+app.config['MAIL_PASSWORD'] = os.getenv('EMAIL_PASS')
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+
+mail = Mail(app)
 
 PROFILE_PHOTO_DIR = os.path.join(os.path.dirname(__file__), 'profile_photos')
 os.makedirs(PROFILE_PHOTO_DIR, exist_ok=True)
@@ -47,7 +61,19 @@ def signup():
     if users_col.find_one({'username': username}):
         return jsonify({'success': False, 'message': 'Username exists'}), 400
     users_col.insert_one({'username': username, 'password': password, 'email': email})
-    return jsonify({'success': True, 'message': 'User created'}), 200
+
+    try:
+        msg = Message(
+            subject="Welcome to SensorData System",
+            sender=app.config['MAIL_USERNAME'],
+            recipients=[email]
+        )
+        msg.body = f"Hi {username},\n\nYour account has been successfully created. Thank you for signing up!"
+        mail.send(msg)
+    except Exception as e:
+        print(f"Email sending failed: {e}")
+
+    return jsonify({'success': True, 'message': 'User created and email sent'}), 200
 
 @app.route('/authenticate', methods=['POST'])
 def authenticate():
