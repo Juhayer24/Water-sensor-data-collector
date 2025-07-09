@@ -68,7 +68,7 @@
 
 .input-group label {
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
   color: #007acc;
   font-weight: 500;
 }
@@ -89,6 +89,40 @@
   box-shadow: 0 0 5px rgba(0, 122, 204, 0.2);
 }
 
+/* New styles for input with select combination */
+.input-with-select {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.input-with-select input {
+  flex: 2;
+  margin: 0;
+}
+
+.unit-select {
+  flex: 1;
+  padding: 10px 12px;
+  font-size: 15px;
+  border: 1px solid #b3d8f7;
+  border-radius: 6px;
+  background: #f7fbff;
+  color: #005f99;
+  transition: border-color 0.3s;
+  cursor: pointer;
+}
+
+.unit-select:focus {
+  outline: none;
+  border-color: #007acc;
+  box-shadow: 0 0 5px rgba(0, 122, 204, 0.2);
+}
+
+.unit-select:hover {
+  border-color: #007acc;
+}
+
 .picture-count-row {
   margin-top: 10px;
   margin-bottom: 18px;
@@ -98,22 +132,29 @@
   font-size: 1.1em;
 }
 
-.refresh-btn {
-  background: linear-gradient(135deg, #eaf6ff, #b3d8f7);
+/* Updated reset button styles */
+.reset-btn {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
   border: none;
   border-radius: 6px;
-  font-size: 18px;
-  padding: 6px 12px;
+  font-size: 14px;
+  padding: 8px 16px;
   cursor: pointer;
-  color: #007acc;
-  transition: background 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(0, 122, 204, 0.08);
+  color: white;
+  font-weight: 500;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(255, 107, 107, 0.2);
+  min-width: 70px;
 }
 
-.refresh-btn:hover {
-  background: linear-gradient(135deg, #d1ebff, #b3d8f7);
-  color: #005f99;
-  box-shadow: 0 4px 16px rgba(0, 122, 204, 0.13);
+.reset-btn:hover {
+  background: linear-gradient(135deg, #ff5252, #e53e3e);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255, 107, 107, 0.3);
+}
+
+.reset-btn:active {
+  transform: scale(0.98);
 }
 
 .add-system-btn {
@@ -142,6 +183,7 @@ select#system {
   color: #005f99;
   font-size: 15px;
   min-width: 160px;
+  flex: 1;
 }
 
 .popup {
@@ -178,4 +220,26 @@ select#system {
 
 .close-button:hover {
   color: #007acc;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .input-with-select {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .input-with-select input,
+  .unit-select {
+    width: 100%;
+  }
+  
+  .input-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .reset-btn {
+    margin-top: 8px;
+  }
 }

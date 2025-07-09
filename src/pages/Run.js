@@ -1,4 +1,3 @@
-// src/pages/Run.js
 import React, { useEffect, useRef, useState } from 'react';
 import '../styles/global.css';
 import '../styles/run.css';
@@ -8,7 +7,9 @@ function Run() {
   const [popupVisible, setPopupVisible] = useState(false);
   const systemNameInputRef = useRef(null);
   const [duration, setDuration] = useState('');
-  const [frequency, setFrequency] = useState('');
+  const [durationUnit, setDurationUnit] = useState('minutes');
+  const [samplingInterval, setSamplingInterval] = useState('');
+  const [samplingUnit, setSamplingUnit] = useState('seconds');
   const [pictureCount, setPictureCount] = useState(0);
   const [notice, setNotice] = useState('System Is Free');
   const [menuOpen, setMenuOpen] = useState(false);
@@ -27,15 +28,31 @@ function Run() {
     }
   }, [popupVisible]);
 
+  // Convert time to seconds
+  const convertToSeconds = (value, unit) => {
+    const num = parseFloat(value);
+    if (isNaN(num) || num <= 0) return 0;
+    
+    switch (unit) {
+      case 'seconds': return num;
+      case 'minutes': return num * 60;
+      case 'hours': return num * 3600;
+      case 'days': return num * 86400;
+      default: return 0;
+    }
+  };
+
+  // Calculate picture count based on duration and sampling interval
   useEffect(() => {
-    const dur = parseFloat(duration);
-    const freq = parseFloat(frequency);
-    if (!isNaN(dur) && !isNaN(freq) && dur > 0 && freq > 0) {
-      setPictureCount(Math.floor(dur * freq));
+    const durationInSeconds = convertToSeconds(duration, durationUnit);
+    const intervalInSeconds = convertToSeconds(samplingInterval, samplingUnit);
+    
+    if (durationInSeconds > 0 && intervalInSeconds > 0) {
+      setPictureCount(Math.floor(durationInSeconds / intervalInSeconds));
     } else {
       setPictureCount(0);
     }
-  }, [duration, frequency]);
+  }, [duration, durationUnit, samplingInterval, samplingUnit]);
 
   const addSystem = async () => {
     const name = systemNameInputRef.current.value.trim();
@@ -69,15 +86,24 @@ function Run() {
 
   const start = (inf = false) => {
     setNotice("System Is In Use");
-    let freq = parseFloat(frequency);
-    let dur = inf ? null : parseFloat(duration);
-    if (!freq || (!inf && !dur)) return;
-    if (freq > 6 || (!inf && dur <= 0)) return;
+    
+    const intervalInSeconds = convertToSeconds(samplingInterval, samplingUnit);
+    const durationInSeconds = inf ? null : convertToSeconds(duration, durationUnit);
+    
+    if (!intervalInSeconds || (!inf && !durationInSeconds)) return;
+    
+    // Convert interval to frequency (images per minute)
+    const frequency = 60 / intervalInSeconds;
+    
+    // Convert duration to minutes
+    const durationInMinutes = inf ? null : durationInSeconds / 60;
+    
+    if (frequency > 6 || (!inf && durationInMinutes <= 0)) return;
 
     fetch("http://127.0.0.1:5000/start", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ duration: dur, frequency: freq })
+      body: JSON.stringify({ duration: durationInMinutes, frequency: frequency })
     });
   };
 
@@ -124,19 +150,59 @@ function Run() {
               systems.map((s, i) => <option key={i}>{s}</option>)
             )}
           </select>
-          <button className="refresh-btn" onClick={deleteAll} title="Delete all systems and refresh">
-            &#x21bb;
+          <button className="reset-btn" onClick={deleteAll} title="Delete all systems and refresh">
+            Reset
           </button>
         </div>
 
         <div className="input-group">
-          <label htmlFor="duration">Duration (minutes):</label>
-          <input type="number" id="duration" min="1" step="1" placeholder="e.g. 10" value={duration} onChange={(e) => setDuration(e.target.value)} />
+          <label htmlFor="duration">Duration of Sampling:</label>
+          <div className="input-with-select">
+            <input 
+              type="number" 
+              id="duration" 
+              min="1" 
+              step="1" 
+              placeholder="e.g. 10" 
+              value={duration} 
+              onChange={(e) => setDuration(e.target.value)} 
+            />
+            <select 
+              value={durationUnit} 
+              onChange={(e) => setDurationUnit(e.target.value)}
+              className="unit-select"
+            >
+              <option value="seconds">Seconds</option>
+              <option value="minutes">Minutes</option>
+              <option value="hours">Hours</option>
+              <option value="days">Days</option>
+            </select>
+          </div>
         </div>
 
         <div className="input-group">
-          <label htmlFor="frequency">Images per minute:</label>
-          <input type="number" id="frequency" min="0.1" max="6" step="0.1" placeholder="e.g. 2.5" value={frequency} onChange={(e) => setFrequency(e.target.value)} />
+          <label htmlFor="sampling-interval">Sampling Interval:</label>
+          <div className="input-with-select">
+            <input 
+              type="number" 
+              id="sampling-interval" 
+              min="0.1" 
+              step="0.1" 
+              placeholder="e.g. 30" 
+              value={samplingInterval} 
+              onChange={(e) => setSamplingInterval(e.target.value)} 
+            />
+            <select 
+              value={samplingUnit} 
+              onChange={(e) => setSamplingUnit(e.target.value)}
+              className="unit-select"
+            >
+              <option value="seconds">Seconds</option>
+              <option value="minutes">Minutes</option>
+              <option value="hours">Hours</option>
+              <option value="days">Days</option>
+            </select>
+          </div>
         </div>
 
         <div className="picture-count-row">
