@@ -1,4 +1,3 @@
-// src/pages/Signup.js
 import React, { useState } from 'react';
 import '../styles/global.css';
 import '../styles/login.css';

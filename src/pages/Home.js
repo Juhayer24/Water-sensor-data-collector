@@ -1,5 +1,3 @@
-// src/pages/Home.js
-
 import React, { useEffect, useRef, useState } from 'react';
 import '../styles/global.css'; // Make sure your CSS is moved to this folder
 import '../styles/home.css';

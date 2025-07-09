@@ -1,5 +1,3 @@
-// src/pages/Login.js
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/login.css'; // Ensure this CSS is in src/styles
