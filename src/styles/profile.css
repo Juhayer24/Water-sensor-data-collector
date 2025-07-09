@@ -103,3 +103,37 @@
 .remove-photo-btn {
   background: linear-gradient(135deg, #ff6a6a, #b36aff);
 }
+
+/* Profile Actions Section */
+.profile-actions {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #eaf6ff;
+}
+
+.reset-password-btn {
+  background: linear-gradient(135deg, #ff9500, #ff6b35);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(255, 149, 0, 0.20);
+  transition: all 0.3s ease;
+  font-size: 1em;
+  min-width: 160px;
+}
+
+.reset-password-btn:hover {
+  background: linear-gradient(135deg, #ff8000, #ff5722);
+  box-shadow: 0 6px 20px rgba(255, 149, 0, 0.30);
+  transform: translateY(-2px);
+}
+
+.reset-password-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(255, 149, 0, 0.15);
+}

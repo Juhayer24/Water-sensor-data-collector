@@ -5,6 +5,9 @@ from flask_mail import Mail, Message
 from dotenv import load_dotenv
 from werkzeug.utils import secure_filename
 import os
+import random
+import string
+from datetime import datetime, timedelta
 
 load_dotenv()
 
@@ -16,6 +19,7 @@ client = MongoClient("mongodb://localhost:27017")
 db = client["mydb"]
 systems_col = db["systems"]
 users_col = db["users"]
+reset_codes_col = db["reset_codes"]  # New collection for reset codes
 
 # Email configuration
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
@@ -29,6 +33,10 @@ mail = Mail(app)
 
 PROFILE_PHOTO_DIR = os.path.join(os.path.dirname(__file__), 'profile_photos')
 os.makedirs(PROFILE_PHOTO_DIR, exist_ok=True)
+
+def generate_reset_code():
+    """Generate a 6-digit random code"""
+    return ''.join(random.choices(string.digits, k=6))
 
 @app.route('/add_system', methods=['POST'])
 def add_system():
@@ -85,6 +93,112 @@ def authenticate():
         return jsonify({'success': True, 'redirect': '/home', 'username': user['username'], 'email': user['email']})
     else:
         return jsonify({'success': False, 'message': 'Invalid credentials'}), 401
+
+@app.route('/forgot_password', methods=['POST'])
+def forgot_password():
+    data = request.get_json()
+    email = data.get('email')
+    
+    if not email:
+        return jsonify({'success': False, 'message': 'Email is required'}), 400
+    
+    # Check if user exists
+    user = users_col.find_one({'email': email})
+    if not user:
+        return jsonify({'success': False, 'message': 'Email not found'}), 404
+    
+    # Generate reset code
+    reset_code = generate_reset_code()
+    
+    # Store reset code in database with expiration (15 minutes)
+    expiry_time = datetime.now() + timedelta(minutes=15)
+    reset_codes_col.insert_one({
+        'email': email,
+        'code': reset_code,
+        'expires_at': expiry_time,
+        'used': False
+    })
+    
+    # Send email with reset code
+    try:
+        msg = Message(
+            subject="Password Reset Code - SensorData System",
+            sender=app.config['MAIL_USERNAME'],
+            recipients=[email]
+        )
+        msg.body = f"""Hi {user['username']},
+
+You have requested to reset your password. Your reset code is: {reset_code}
+
+This code will expire in 15 minutes. If you did not request this reset, please ignore this email.
+
+Best regards,
+SensorData System Team"""
+        mail.send(msg)
+        return jsonify({'success': True, 'message': 'Reset code sent to your email'})
+    except Exception as e:
+        print(f"Email sending failed: {e}")
+        return jsonify({'success': False, 'message': 'Failed to send reset code'}), 500
+
+@app.route('/verify_reset_code', methods=['POST'])
+def verify_reset_code():
+    data = request.get_json()
+    email = data.get('email')
+    code = data.get('code')
+    
+    if not email or not code:
+        return jsonify({'success': False, 'message': 'Email and code are required'}), 400
+    
+    # Find valid reset code
+    reset_entry = reset_codes_col.find_one({
+        'email': email,
+        'code': code,
+        'used': False,
+        'expires_at': {'$gt': datetime.now()}
+    })
+    
+    if not reset_entry:
+        return jsonify({'success': False, 'message': 'Invalid or expired code'}), 400
+    
+    return jsonify({'success': True, 'message': 'Code verified successfully'})
+
+@app.route('/reset_password', methods=['POST'])
+def reset_password():
+    data = request.get_json()
+    email = data.get('email')
+    code = data.get('code')
+    new_password = data.get('new_password')
+    
+    if not email or not code or not new_password:
+        return jsonify({'success': False, 'message': 'All fields are required'}), 400
+    
+    # Find valid reset code
+    reset_entry = reset_codes_col.find_one({
+        'email': email,
+        'code': code,
+        'used': False,
+        'expires_at': {'$gt': datetime.now()}
+    })
+    
+    if not reset_entry:
+        return jsonify({'success': False, 'message': 'Invalid or expired code'}), 400
+    
+    # Update user password
+    result = users_col.update_one(
+        {'email': email},
+        {'$set': {'password': new_password}}
+    )
+    
+    if result.modified_count == 0:
+        return jsonify({'success': False, 'message': 'Failed to update password'}), 500
+    
+    # Mark reset code as used
+    reset_codes_col.update_one(
+        {'_id': reset_entry['_id']},
+        {'$set': {'used': True}}
+    )
+    
+    return jsonify({'success': True, 'message': 'Password reset successfully'})
 
 @app.route('/profile')
 def profile():

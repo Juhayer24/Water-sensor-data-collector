@@ -1,4 +1,3 @@
-// src/pages/Profile.js
 import React, { useEffect, useState, useRef } from 'react';
 import '../styles/global.css';
 import '../styles/profile.css';
@@ -56,6 +55,10 @@ function Profile() {
   const handleLogout = () => {
     localStorage.removeItem('currentUser');
     window.location.href = '/login';
+  };
+
+  const handleResetPassword = () => {
+    window.location.href = '/reset';
   };
 
   const addSystem = async () => {
@@ -216,6 +219,13 @@ function Profile() {
                     {systems.length > 0 && `(${systems.length})`}
                   </span>
                 </div>
+              </div>
+              
+              {/* Reset Password Button */}
+              <div className="profile-actions">
+                <button className="reset-password-btn" onClick={handleResetPassword}>
+                  Reset Password
+                </button>
               </div>
             </div>
           )}

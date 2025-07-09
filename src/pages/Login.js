@@ -1,19 +1,16 @@
-// src/pages/Login.js
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/login.css'; // Ensure this CSS is in src/styles
-import {useAuth} from "../Authentication"
+import { useAuth } from "../Authentication"
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { login } = useAuth()
-  const navigate = useNavigate()
-  
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
   const handleLogin = async () => {
     try {
-
       const response = await fetch('http://127.0.0.1:5000/authenticate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -23,14 +20,13 @@ function Login() {
       const data = await response.json();
 
       if (data.success) {
-        const user = {user: username}
-        login(user)
-        console.log(user)
+        const user = { user: username };
+        login(user);
+        console.log(user);
 
         localStorage.setItem('currentUser', username);
-        
-        navigate(data.redirect || '/profile')
-        //window.location.href = data.redirect; // or use navigate() with React Router
+
+        navigate(data.redirect || '/profile');
       } else {
         alert(data.message || 'Login failed');
       }
@@ -38,6 +34,10 @@ function Login() {
       console.error('Login error:', error);
       alert('Something went wrong');
     }
+  };
+
+  const handleForgotPassword = () => {
+    navigate('/reset');
   };
 
   return (
@@ -66,6 +66,15 @@ function Login() {
           />
 
           <button onClick={handleLogin}>Login</button>
+          
+          <button 
+            type="button" 
+            className="forgot-password-btn"
+            onClick={handleForgotPassword}
+          >
+            Forgot Password?
+          </button>
+          
           <p className="signup-link">
             Don't have an account? <a href="/signup">Sign up here</a>
           </p>
