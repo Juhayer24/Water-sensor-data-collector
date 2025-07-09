@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 // Import all your pages
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Reset from "./pages/reset";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Run from "./pages/Run";
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/reset" element={<Reset />} />
         <Route path="/home" element={
           <ProtectedRoute>
             <Home />

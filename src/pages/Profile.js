@@ -57,6 +57,10 @@ function Profile() {
     window.location.href = '/login';
   };
 
+  const handleResetPassword = () => {
+    window.location.href = '/reset';
+  };
+
   const addSystem = async () => {
     const name = systemNameInputRef.current.value.trim();
     if (!name) return;
@@ -215,6 +219,13 @@ function Profile() {
                     {systems.length > 0 && `(${systems.length})`}
                   </span>
                 </div>
+              </div>
+              
+              {/* Reset Password Button */}
+              <div className="profile-actions">
+                <button className="reset-password-btn" onClick={handleResetPassword}>
+                  Reset Password
+                </button>
               </div>
             </div>
           )}
