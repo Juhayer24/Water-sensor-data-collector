@@ -9,8 +9,9 @@ function Login() {
   const { login } = useAuth(); // Access login function from authentication context
   const navigate = useNavigate(); // Used to programmatically navigate pages
 
-  // Handles login when user clicks the login button
-  const handleLogin = async () => {
+  // Handles login when user clicks the login button or submits the form
+  const handleLogin = async (e) => {
+    if (e) e.preventDefault(); // Prevent default form submission
     try {
       const response = await fetch('http://127.0.0.1:5000/authenticate', {
         method: 'POST',
@@ -52,26 +53,27 @@ function Login() {
       <div className="form-side">
         <div className="login-container">
           <h2>Login</h2>
+          <form onSubmit={handleLogin}>
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              placeholder="Enter your username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
 
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            placeholder="Enter your username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
 
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
-          <button onClick={handleLogin}>Login</button>
+            <button type="submit">Login</button>
+          </form>
           
           {/* Link to password reset */}
           <button 
