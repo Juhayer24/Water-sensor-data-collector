@@ -1,4 +1,4 @@
-/* Inherit layout from login.css for consistent sizing */
+/* Got the layout from login.css for consistent sizing */
 @import url('./login.css');
 
 .signup-link {

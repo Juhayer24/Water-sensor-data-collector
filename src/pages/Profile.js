@@ -3,16 +3,17 @@ import '../styles/global.css';
 import '../styles/profile.css';
 
 function Profile() {
-  const [userData, setUserData] = useState(null);
-  const [message, setMessage] = useState('');
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [popupVisible, setPopupVisible] = useState(false);
-  const [profilePhoto, setProfilePhoto] = useState(null);
-  const [photoLoading, setPhotoLoading] = useState(false);
-  const [systems, setSystems] = useState([]);
-  const [systemsLoading, setSystemsLoading] = useState(true);
-  const systemNameInputRef = useRef(null);
-  const fileInputRef = useRef(null);
+  const [userData, setUserData] = useState(null);           // Stores user profile data
+  const [message, setMessage] = useState('');               // Stores message (e.g., login reminder)
+  const [menuOpen, setMenuOpen] = useState(false);          // Controls hamburger menu visibility
+  const [popupVisible, setPopupVisible] = useState(false);  // Controls add system popup visibility
+  const [profilePhoto, setProfilePhoto] = useState(null);   // Stores profile photo as URL blob
+  const [photoLoading, setPhotoLoading] = useState(false);  // Indicates if photo is uploading/deleting
+  const [systems, setSystems] = useState([]);               // List of user's systems
+  const [systemsLoading, setSystemsLoading] = useState(true); // Indicates if systems are being loaded
+
+  const systemNameInputRef = useRef(null); // Ref to system name input field in popup
+  const fileInputRef = useRef(null);       // Ref to hidden file input for photo upload
 
   useEffect(() => {
     const username = localStorage.getItem('currentUser');
@@ -21,13 +22,14 @@ function Profile() {
       return;
     }
 
-    // Fetch user profile
+    // Fetch user profile data
     fetch(`http://127.0.0.1:5000/profile?username=${encodeURIComponent(username)}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
           setUserData(data.user);
-          // Try to fetch profile photo
+
+          // Try fetching profile photo
           fetch(`http://127.0.0.1:5000/profile_photo/${encodeURIComponent(username)}`)
             .then((res) => {
               if (res.ok) return res.blob();
@@ -42,7 +44,7 @@ function Profile() {
         }
       });
 
-    // Fetch user systems
+    // Fetch systems associated with the user
     setSystemsLoading(true);
     fetch(`http://127.0.0.1:5000/get_systems?username=${encodeURIComponent(username)}`)
       .then((res) => res.json())
@@ -52,28 +54,34 @@ function Profile() {
       });
   }, []);
 
+  // Logs out the user and redirects to login
   const handleLogout = () => {
     localStorage.removeItem('currentUser');
     window.location.href = '/login';
   };
 
+  // Navigates to password reset page
   const handleResetPassword = () => {
     window.location.href = '/reset';
   };
 
+  // Adds a new system for the user
   const addSystem = async () => {
     const name = systemNameInputRef.current.value.trim();
     if (!name) return;
+
     const username = localStorage.getItem('currentUser');
     const response = await fetch("http://127.0.0.1:5000/add_system", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ system_name: name, username })
     });
+
     if (response.ok) {
       alert(`System "${name}" added.`);
       setPopupVisible(false);
-      // Refresh systems list
+
+      // Refresh the list of systems after adding
       setSystemsLoading(true);
       fetch(`http://127.0.0.1:5000/get_systems?username=${encodeURIComponent(username)}`)
         .then((res) => res.json())
@@ -86,14 +94,17 @@ function Profile() {
     }
   };
 
+  // Uploads a new profile photo
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
+
     setPhotoLoading(true);
     const username = localStorage.getItem('currentUser');
     const formData = new FormData();
     formData.append('username', username);
     formData.append('photo', file);
+
     fetch('http://127.0.0.1:5000/upload_profile_photo', {
       method: 'POST',
       body: formData,
@@ -101,7 +112,7 @@ function Profile() {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          // Refresh photo
+          // Reload the photo with a fresh timestamp to bust cache
           fetch(`http://127.0.0.1:5000/profile_photo/${encodeURIComponent(username)}?t=${Date.now()}`)
             .then((res) => res.blob())
             .then((blob) => {
@@ -117,9 +128,11 @@ function Profile() {
       });
   };
 
+  // Removes the current profile photo
   const handleRemovePhoto = () => {
     const username = localStorage.getItem('currentUser');
     setPhotoLoading(true);
+
     fetch('http://127.0.0.1:5000/remove_profile_photo', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -138,6 +151,7 @@ function Profile() {
 
   return (
     <div>
+      {/* Navigation Bar */}
       <nav style={{ position: 'relative' }}>
         <button className="nav-hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
           &#9776;
@@ -156,11 +170,15 @@ function Profile() {
           <button onClick={() => setPopupVisible(true)}>+ Add System</button>
         </div>
       </nav>
+
+      {/* Main Profile Content */}
       <div className="profile-container">
         <div id="profile-content">
           {message && <p>{message}</p>}
+
           {userData && (
             <div className="profile-card">
+              {/* Profile Photo Section */}
               <div className="profile-photo-wrapper">
                 {profilePhoto ? (
                   <img
@@ -174,6 +192,8 @@ function Profile() {
                     <span role="img" aria-label="No Photo" style={{ fontSize: '2.5em', color: '#b36aff' }}>👤</span>
                   </div>
                 )}
+
+                {/* Hidden File Input */}
                 <input
                   type="file"
                   accept="image/*"
@@ -181,6 +201,7 @@ function Profile() {
                   ref={fileInputRef}
                   onChange={handlePhotoUpload}
                 />
+
                 <div className="photo-btn-row">
                   <button
                     className="upload-photo-btn"
@@ -198,6 +219,8 @@ function Profile() {
                   )}
                 </div>
               </div>
+
+              {/* Welcome + User Info */}
               <h2>Welcome, {userData.username}!</h2>
               <div className="profile-info">
                 <div><span>Username:</span> {userData.username}</div>
@@ -220,7 +243,7 @@ function Profile() {
                   </span>
                 </div>
               </div>
-              
+
               {/* Reset Password Button */}
               <div className="profile-actions">
                 <button className="reset-password-btn" onClick={handleResetPassword}>
@@ -231,6 +254,8 @@ function Profile() {
           )}
         </div>
       </div>
+
+      {/* Add System Popup */}
       {popupVisible && (
         <div className="popup" style={{ display: 'flex' }}>
           <div className="popup-content">

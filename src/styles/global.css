@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;700&display=swap');
 
-/* Global Body Style */
+/* Set global font, layout, and background styling */
 body {
   font-family: 'Inter', 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
@@ -11,11 +11,13 @@ body {
   animation: bodyFadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Smooth fade-in animation for body */
 @keyframes bodyFadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
+/* Styling for all heading elements */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Montserrat', 'Inter', sans-serif;
   letter-spacing: 1px;
@@ -24,12 +26,13 @@ h1, h2, h3, h4, h5, h6 {
   animation: titlePopIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Pop-in effect for headings */
 @keyframes titlePopIn {
   0% { opacity: 0; transform: scale(0.95) translateY(20px); }
   100% { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-/* Navigation Bar */
+/* Top navigation bar styling */
 nav {
   background-color: #ffffff;
   padding: 34px 24px;
@@ -45,11 +48,13 @@ nav {
   animation: navSlideDown 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Slide down effect for nav on load */
 @keyframes navSlideDown {
   from { opacity: 0; transform: translateY(-30px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Hamburger menu for mobile navigation */
 .nav-hamburger {
   position: absolute;
   left: 24px;
@@ -67,6 +72,7 @@ nav {
   color: #005f99;
 }
 
+/* Centers nav links horizontally */
 .nav-center {
   position: absolute;
   left: 50%;
@@ -77,6 +83,7 @@ nav {
   align-items: center;
 }
 
+/* Dropdown menu styling */
 .nav-dropdown {
   position: absolute;
   left: 24px;
@@ -92,6 +99,7 @@ nav {
   animation: fadeIn 0.2s;
 }
 
+/* Dropdown item button and link styles */
 .nav-dropdown button, .nav-dropdown a {
   background: none;
   border: none;
@@ -109,6 +117,7 @@ nav {
   color: #005f99;
 }
 
+/* Navigation links styling */
 nav a {
   text-decoration: none;
   color: #000;
@@ -123,6 +132,7 @@ nav a {
   overflow: hidden;
 }
 
+/* Gradient underline animation on hover */
 nav a::after {
   content: '';
   display: block;
@@ -140,7 +150,7 @@ nav a:hover::after {
   left: 0;
 }
 
-/* Popup Overlay */
+/* Overlay background for popups */
 .popup {
   display: none;
   position: fixed;
@@ -154,6 +164,7 @@ nav a:hover::after {
   animation: fadeIn 0.3s ease-in-out;
 }
 
+/* Popup container styling */
 .popup-content {
   background-color: #ffffff;
   padding: 30px 40px;
@@ -165,21 +176,25 @@ nav a:hover::after {
   animation: slideUp 0.3s ease-out, popupAppear 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Fade in effect used for popups */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
+/* Slide up entry animation */
 @keyframes slideUp {
   from { transform: translateY(30px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
 
+/* Popup scaling animation */
 @keyframes popupAppear {
   from { opacity: 0; transform: scale(0.95) translateY(30px); }
   to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
+/* Close icon styling for popups */
 .close-button {
   position: absolute;
   top: 12px;
@@ -194,6 +209,7 @@ nav a:hover::after {
   color: #007acc;
 }
 
+/* Paragraphs inside popups */
 .popup-content p {
   margin: 0 0 10px;
   font-size: 16px;
@@ -201,6 +217,7 @@ nav a:hover::after {
   color: #333;
 }
 
+/* Input fields inside popups */
 .popup-content input {
   width: 100%;
   padding: 10px 12px;
@@ -210,12 +227,14 @@ nav a:hover::after {
   transition: border-color 0.3s;
 }
 
+/* Input focus style */
 .popup-content input:focus {
   outline: none;
   border-color: #007acc;
   box-shadow: 0 0 5px rgba(0, 122, 204, 0.3);
 }
 
+/* Aligns buttons or other elements to the right side of nav */
 .nav-right {
   position: absolute;
   right: 24px;
@@ -225,6 +244,7 @@ nav a:hover::after {
   align-items: center;
 }
 
+/* Styling for buttons on the right side of nav */
 .nav-right button {
   background: linear-gradient(135deg, #007acc, #005f99);
   color: white;
@@ -244,6 +264,7 @@ nav a:hover::after {
   background: linear-gradient(135deg, #005f99, #003d66);
 }
 
+/* Shared button styles across multiple components */
 .button-row button, .nav-right button, .add-system-btn {
   font-family: 'Montserrat', 'Inter', sans-serif;
   font-weight: 700;
@@ -253,18 +274,20 @@ nav a:hover::after {
   animation: buttonFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Button entrance animation */
 @keyframes buttonFadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Style inputs and dropdowns */
 input, select {
   font-family: 'Inter', 'Montserrat', sans-serif;
   font-size: 1em;
   transition: box-shadow 0.3s;
 }
 
+/* Add glow effect when focused */
 input:focus, select:focus {
   box-shadow: 0 0 8px #b36aff33;
 }
-

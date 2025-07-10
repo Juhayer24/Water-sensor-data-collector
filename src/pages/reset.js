@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/reset.css'; // You'll need to create this CSS file
+import '../styles/reset.css'; // Custom styling for reset password page
 
 function Reset() {
-  const [step, setStep] = useState(1); // 1: email, 2: code verification, 3: new password
-  const [email, setEmail] = useState('');
-  const [code, setCode] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
-  const navigate = useNavigate();
+  const [step, setStep] = useState(1); // Controls which step of the reset process user is on
+  const [email, setEmail] = useState(''); // Stores user's email
+  const [code, setCode] = useState(''); // Stores verification code input
+  const [newPassword, setNewPassword] = useState(''); // Stores new password
+  const [confirmPassword, setConfirmPassword] = useState(''); // Stores confirmation of new password
+  const [loading, setLoading] = useState(false); // Indicates if async action is in progress
+  const [message, setMessage] = useState(''); // Feedback message shown to user
+  const navigate = useNavigate(); // Navigation hook for redirecting
 
+  // Sends a reset code to the user's email
   const handleSendCode = async () => {
     if (!email) {
       setMessage('Please enter your email address');
@@ -44,6 +45,7 @@ function Reset() {
     }
   };
 
+  // Verifies the code sent to user's email
   const handleVerifyCode = async () => {
     if (!code) {
       setMessage('Please enter the verification code');
@@ -76,6 +78,7 @@ function Reset() {
     }
   };
 
+  // Submits the new password to complete the reset
   const handleResetPassword = async () => {
     if (!newPassword || !confirmPassword) {
       setMessage('Please fill in both password fields');
@@ -120,15 +123,17 @@ function Reset() {
     }
   };
 
+  // Redirects user back to login page
   const handleBackToLogin = () => {
     navigate('/login');
   };
 
+  // Step 1: Request reset code
   const renderStep1 = () => (
     <div className="reset-step">
       <h2>Reset Password</h2>
       <p>Enter your email address and we'll send you a verification code</p>
-      
+
       <label htmlFor="email">Email Address</label>
       <input
         type="email"
@@ -138,22 +143,23 @@ function Reset() {
         onChange={(e) => setEmail(e.target.value)}
         disabled={loading}
       />
-      
+
       <button onClick={handleSendCode} disabled={loading}>
         {loading ? 'Sending...' : 'Send Reset Code'}
       </button>
-      
+
       <button type="button" className="back-btn" onClick={handleBackToLogin}>
         Back to Login
       </button>
     </div>
   );
 
+  // Step 2: Verify code
   const renderStep2 = () => (
     <div className="reset-step">
       <h2>Verify Code</h2>
       <p>Enter the 6-digit code sent to {email}</p>
-      
+
       <label htmlFor="code">Verification Code</label>
       <input
         type="text"
@@ -164,22 +170,23 @@ function Reset() {
         maxLength="6"
         disabled={loading}
       />
-      
+
       <button onClick={handleVerifyCode} disabled={loading}>
         {loading ? 'Verifying...' : 'Verify Code'}
       </button>
-      
+
       <button type="button" className="back-btn" onClick={() => setStep(1)}>
         Back to Email
       </button>
     </div>
   );
 
+  // Step 3: Set new password
   const renderStep3 = () => (
     <div className="reset-step">
       <h2>Set New Password</h2>
       <p>Enter your new password</p>
-      
+
       <label htmlFor="newPassword">New Password</label>
       <input
         type="password"
@@ -189,7 +196,7 @@ function Reset() {
         onChange={(e) => setNewPassword(e.target.value)}
         disabled={loading}
       />
-      
+
       <label htmlFor="confirmPassword">Confirm Password</label>
       <input
         type="password"
@@ -199,11 +206,11 @@ function Reset() {
         onChange={(e) => setConfirmPassword(e.target.value)}
         disabled={loading}
       />
-      
+
       <button onClick={handleResetPassword} disabled={loading}>
         {loading ? 'Resetting...' : 'Reset Password'}
       </button>
-      
+
       <button type="button" className="back-btn" onClick={() => setStep(2)}>
         Back to Code
       </button>
@@ -212,13 +219,15 @@ function Reset() {
 
   return (
     <div className="reset-wrapper">
-      <div className="image-side"></div>
+      <div className="image-side"></div> {/* Decorative image panel */}
       <div className="form-side">
         <div className="reset-container">
+          {/* Render appropriate step */}
           {step === 1 && renderStep1()}
           {step === 2 && renderStep2()}
           {step === 3 && renderStep3()}
-          
+
+          {/* Display success or error message */}
           {message && (
             <div className={`message ${message.includes('success') ? 'success' : 'error'}`}>
               {message}

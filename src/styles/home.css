@@ -1,33 +1,36 @@
-/* Animated tech logos bar for Home page */
+/* Container for the scrolling row of tech logos */
 .tech-logos-bar {
   position: relative;
-  width: 100vw;
+  width: 100vw; /* Take full width of the viewport */
   max-width: 100%;
-  overflow: hidden;
+  overflow: hidden; /* Hide logos as they scroll outside the container */
   margin-top: 18px;
   margin-bottom: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: white;
-  min-height: 70px;
+  min-height: 70px; /* Ensures consistent height */
 }
 
+/* Inner track that holds and scrolls the logos horizontally */
 .tech-logos-track {
   display: flex;
   align-items: center;
-  gap: 200px;
-  width: calc(200%);
-  animation: scroll 20s linear infinite;
+  gap: 200px; /* Space between logos */
+  width: calc(200%); /* Double the container width for seamless looping */
+  animation: scroll 20s linear infinite; /* Infinite horizontal scroll */
 }
 
+/* Individual logo styles */
 .logo {
   width: 100px;
   height: auto;
   margin: 0 68px;
-  flex-shrink: 0;
+  flex-shrink: 0; /* Prevent shrinking when space is tight */
 }
 
+/* Animation that moves the track to the left continuously */
 @keyframes scroll {
   0% {
     transform: translateX(0%);
@@ -37,7 +40,14 @@
   }
 }
 
+/* Responsive adjustments for smaller screens */
 @media (max-width: 700px) {
-  .tech-logo { height: 36px; padding: 3px 6px; }
-  .tech-logos-track { gap: 32px; }
+  .tech-logo {
+    height: 36px;
+    padding: 3px 6px;
+  }
+
+  .tech-logos-track {
+    gap: 32px; /* Reduce spacing between logos on small devices */
+  }
 }

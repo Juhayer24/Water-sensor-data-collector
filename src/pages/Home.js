@@ -1,20 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
-import '../styles/global.css'; // Make sure your CSS is moved to this folder
-import '../styles/home.css';
+import '../styles/global.css'; // Import global styles
+import '../styles/home.css';   // Import home page-specific styles
 import Marquee from "react-fast-marquee";
 
 function Home() {
-  const [showPopup, setShowPopup] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const systemNameInput = useRef(null);
-  const username = localStorage.getItem('currentUser');
+  const [showPopup, setShowPopup] = useState(false); // Controls the visibility of the "Add System" popup
+  const [menuOpen, setMenuOpen] = useState(false);   // Toggles mobile dropdown menu
+  const systemNameInput = useRef(null);              // Ref to input field inside the popup
+  const username = localStorage.getItem('currentUser'); // Retrieve logged-in user from local storage
 
+  // Automatically focus the input field when popup opens
   useEffect(() => {
     if (showPopup && systemNameInput.current) {
       systemNameInput.current.focus();
     }
   }, [showPopup]);
 
+  // Handle "Enter" key press when typing in the popup input field
   const handleKeyDown = async (event) => {
     if (event.key === 'Enter') {
       const systemName = systemNameInput.current.value.trim();
@@ -33,7 +35,7 @@ function Home() {
           alert(`System "${systemName}" added.`);
           systemNameInput.current.value = '';
           setShowPopup(false);
-          window.location.href = '/run'; // Use React Router in production
+          window.location.href = '/run'; // Navigate to the image-taking page
         } else {
           alert('Failed to add system.');
         }
@@ -44,12 +46,13 @@ function Home() {
     }
   };
 
+  // Logout the user and redirect to login page
   const handleLogout = () => {
     localStorage.removeItem('currentUser');
     window.location.href = '/login';
   };
 
-  // Define the logos array (use your actual logo paths)
+  // Logos to display in the marquee bar
   const logos = [
     '/logos/r.png',
     'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
@@ -82,7 +85,7 @@ function Home() {
         </div>
       </nav>
 
-      {/* Title and Start Button */}
+      {/* Page title and primary call-to-action button */}
       <div style={{
         display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 36, marginBottom: 32
       }}>
@@ -129,7 +132,7 @@ function Home() {
         </a>
       </div>
 
-      {/* Add System Popup */}
+      {/* Popup form for adding a new system */}
       {showPopup && (
         <div id="add_system_popup" className="popup" style={{ display: 'flex' }}>
           <div className="popup-content">
@@ -168,7 +171,7 @@ function Home() {
         </div>
       )}
 
-      {/* Animated Tech Logos Bar using react-fast-marquee */}
+      {/* Horizontal scrolling banner of tech logos */}
       <div className="tech-logos-bar">
         <Marquee gradient={false} speed={80} pauseOnHover={true}>
           {logos.map((logo, index) => (

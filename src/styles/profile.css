@@ -1,3 +1,4 @@
+/* Main container that wraps the entire profile section */
 .profile-container {
   max-width: 480px;
   margin: 48px auto;
@@ -8,10 +9,12 @@
   min-height: 320px;
 }
 
+/* Card layout for displaying profile content centered */
 .profile-card {
   text-align: center;
 }
 
+/* Profile name heading */
 .profile-card h2 {
   color: #007acc;
   margin-bottom: 18px;
@@ -19,6 +22,7 @@
   font-weight: 700;
 }
 
+/* Box holding user details like name, email, etc. */
 .profile-info {
   margin-top: 18px;
   background: #eaf6ff;
@@ -29,18 +33,20 @@
   box-shadow: 0 2px 8px rgba(0, 122, 204, 0.07);
 }
 
+/* Individual lines of info (like "Email:", "Username:", etc.) */
 .profile-info div {
   margin: 10px 0;
   font-weight: 500;
 }
 
+/* Key label styling for profile info (e.g. "Name:") */
 .profile-info span {
   color: #007acc;
   font-weight: 600;
   margin-right: 8px;
 }
 
-/* Profile Photo Styles */
+/* Section for displaying and managing the profile photo */
 .profile-photo-wrapper {
   display: flex;
   flex-direction: column;
@@ -48,6 +54,7 @@
   margin-bottom: 24px;
 }
 
+/* Actual profile picture styling */
 .profile-photo {
   width: 120px;
   height: 120px;
@@ -60,6 +67,7 @@
   transition: opacity 0.3s;
 }
 
+/* Placeholder style for when no profile picture is uploaded */
 .profile-photo.placeholder {
   display: flex;
   align-items: center;
@@ -73,6 +81,7 @@
   margin-bottom: 12px;
 }
 
+/* Row of buttons under the photo (Upload, Remove) */
 .photo-btn-row {
   display: flex;
   gap: 12px;
@@ -80,6 +89,7 @@
   margin-bottom: 8px;
 }
 
+/* Shared styles for Upload and Remove buttons */
 .upload-photo-btn, .remove-photo-btn {
   background: linear-gradient(135deg, #b36aff, #007acc);
   color: #fff;
@@ -95,22 +105,25 @@
   font-size: 1em;
 }
 
+/* Disabled state for buttons */
 .upload-photo-btn:disabled, .remove-photo-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
+/* Remove button gets a different color gradient to signal danger */
 .remove-photo-btn {
   background: linear-gradient(135deg, #ff6a6a, #b36aff);
 }
 
-/* Profile Actions Section */
+/* Section below the profile card for additional actions */
 .profile-actions {
   margin-top: 24px;
   padding-top: 20px;
   border-top: 1px solid #eaf6ff;
 }
 
+/* "Reset Password" button styling */
 .reset-password-btn {
   background: linear-gradient(135deg, #ff9500, #ff6b35);
   color: #fff;
@@ -127,12 +140,14 @@
   min-width: 160px;
 }
 
+/* Hover effect for reset password button */
 .reset-password-btn:hover {
   background: linear-gradient(135deg, #ff8000, #ff5722);
   box-shadow: 0 6px 20px rgba(255, 149, 0, 0.30);
   transform: translateY(-2px);
 }
 
+/* Active click effect */
 .reset-password-btn:active {
   transform: translateY(0);
   box-shadow: 0 2px 8px rgba(255, 149, 0, 0.15);
