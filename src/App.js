@@ -8,6 +8,7 @@ import Reset from "./pages/reset";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Run from "./pages/Run";
+import Help from "./pages/help";
 
 // This component protects routes that require the user to be logged in
 import ProtectedRoute from "./Protect_Route";
@@ -53,6 +54,15 @@ function App() {
           element={
             <ProtectedRoute>
               <Run />
+            </ProtectedRoute>
+          } 
+        />
+
+        <Route 
+          path="/help" 
+          element={
+            <ProtectedRoute>
+              <Help />
             </ProtectedRoute>
           } 
         />

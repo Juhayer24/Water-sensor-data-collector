@@ -147,6 +147,7 @@ function Run() {
         {menuOpen && (
           <div className="nav-dropdown">
             <button onClick={handleLogout}>Logout</button>
+            <a href="/help" className="nav-dropdown-link">Help</a>
           </div>
         )}
         <div className="nav-center">
