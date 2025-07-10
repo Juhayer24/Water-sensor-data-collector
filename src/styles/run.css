@@ -1,3 +1,4 @@
+/* Main form container */
 .container {
   max-width: 600px;
   margin: auto;
@@ -8,12 +9,14 @@
   margin-top: 40px;
 }
 
+/* Form title */
 .container h2 {
   text-align: center;
   margin-bottom: 30px;
   color: #007acc;
 }
 
+/* Labels for inputs */
 .container label {
   display: block;
   margin-top: 20px;
@@ -21,6 +24,7 @@
   color: #333;
 }
 
+/* Row for action buttons (Submit, Reset, etc.) */
 .button-row {
   margin-top: 20px;
   display: flex;
@@ -28,6 +32,7 @@
   flex-wrap: wrap;
 }
 
+/* Styling for each button inside the row */
 .button-row button {
   background: linear-gradient(135deg, #007acc, #005f99);
   color: #fff;
@@ -43,17 +48,20 @@
   margin-bottom: 4px;
 }
 
+/* Button hover animation */
 .button-row button:hover {
   background: linear-gradient(135deg, #005f99, #003d66);
   transform: translateY(-2px) scale(1.04);
   box-shadow: 0 8px 24px rgba(0, 122, 204, 0.18);
 }
 
+/* Button click effect */
 .button-row button:active {
   background: linear-gradient(135deg, #007acc, #005f99);
   transform: scale(0.98);
 }
 
+/* Horizontal input row (used to align label/input/select side by side) */
 .input-row {
   display: flex;
   gap: 10px;
@@ -61,11 +69,13 @@
   margin-bottom: 10px;
 }
 
+/* Group input and label together */
 .input-group {
   margin-top: 18px;
   margin-bottom: 8px;
 }
 
+/* Label inside an input group */
 .input-group label {
   display: block;
   margin-bottom: 8px;
@@ -73,6 +83,7 @@
   font-weight: 500;
 }
 
+/* Input styling */
 .input-group input {
   width: 100%;
   padding: 10px 12px;
@@ -83,24 +94,27 @@
   background: #f7fbff;
 }
 
+/* Highlight input on focus */
 .input-group input:focus {
   outline: none;
   border-color: #007acc;
   box-shadow: 0 0 5px rgba(0, 122, 204, 0.2);
 }
 
-/* New styles for input with select combination */
+/* Layout for input field next to select dropdown */
 .input-with-select {
   display: flex;
   gap: 8px;
   align-items: center;
 }
 
+/* Input inside input-with-select layout */
 .input-with-select input {
   flex: 2;
   margin: 0;
 }
 
+/* Styling for select dropdown (e.g., unit selector) */
 .unit-select {
   flex: 1;
   padding: 10px 12px;
@@ -113,16 +127,19 @@
   cursor: pointer;
 }
 
+/* Focus styles for dropdown */
 .unit-select:focus {
   outline: none;
   border-color: #007acc;
   box-shadow: 0 0 5px rgba(0, 122, 204, 0.2);
 }
 
+/* Hover effect for select dropdown */
 .unit-select:hover {
   border-color: #007acc;
 }
 
+/* Shows how many pictures are added (text display) */
 .picture-count-row {
   margin-top: 10px;
   margin-bottom: 18px;
@@ -132,7 +149,7 @@
   font-size: 1.1em;
 }
 
-/* Updated reset button styles */
+/* Reset button design */
 .reset-btn {
   background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
   border: none;
@@ -147,16 +164,19 @@
   min-width: 70px;
 }
 
+/* Hover effect for reset button */
 .reset-btn:hover {
   background: linear-gradient(135deg, #ff5252, #e53e3e);
   transform: translateY(-1px);
   box-shadow: 0 4px 16px rgba(255, 107, 107, 0.3);
 }
 
+/* Reset button click effect */
 .reset-btn:active {
   transform: scale(0.98);
 }
 
+/* Add System button styling */
 .add-system-btn {
   margin-top: 12px;
   background: linear-gradient(135deg, #007acc, #005f99);
@@ -171,10 +191,12 @@
   width: 100%;
 }
 
+/* Add System hover effect */
 .add-system-btn:hover {
   background: linear-gradient(135deg, #005f99, #003d66);
 }
 
+/* Custom select styling inside the form */
 select#system {
   padding: 8px 12px;
   border-radius: 6px;
@@ -186,6 +208,7 @@ select#system {
   flex: 1;
 }
 
+/* Popup background overlay */
 .popup {
   position: fixed;
   top: 0;
@@ -199,6 +222,7 @@ select#system {
   z-index: 1000;
 }
 
+/* Modal content styling */
 .popup-content {
   background: #fff;
   padding: 30px 28px;
@@ -208,6 +232,7 @@ select#system {
   position: relative;
 }
 
+/* Close (X) button inside popup */
 .close-button {
   position: absolute;
   top: 12px;
@@ -218,27 +243,28 @@ select#system {
   transition: color 0.3s ease;
 }
 
+/* Close button hover effect */
 .close-button:hover {
   color: #007acc;
 }
 
-/* Responsive adjustments */
+/* Mobile responsiveness */
 @media (max-width: 600px) {
   .input-with-select {
     flex-direction: column;
     gap: 8px;
   }
-  
+
   .input-with-select input,
   .unit-select {
     width: 100%;
   }
-  
+
   .input-row {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .reset-btn {
     margin-top: 8px;
   }

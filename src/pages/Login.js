@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/login.css'; // Ensure this CSS is in src/styles
+import '../styles/login.css'; // Login page-specific styles
 import { useAuth } from "../Authentication"
 
 function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const { login } = useAuth();
-  const navigate = useNavigate();
+  const [username, setUsername] = useState(''); // Stores entered username
+  const [password, setPassword] = useState(''); // Stores entered password
+  const { login } = useAuth(); // Access login function from authentication context
+  const navigate = useNavigate(); // Used to programmatically navigate pages
 
+  // Handles login when user clicks the login button
   const handleLogin = async () => {
     try {
       const response = await fetch('http://127.0.0.1:5000/authenticate', {
@@ -21,11 +22,12 @@ function Login() {
 
       if (data.success) {
         const user = { user: username };
-        login(user);
+        login(user); // Update auth state
         console.log(user);
 
-        localStorage.setItem('currentUser', username);
+        localStorage.setItem('currentUser', username); // Save user locally
 
+        // Navigate to redirect path or default to /profile
         navigate(data.redirect || '/profile');
       } else {
         alert(data.message || 'Login failed');
@@ -36,13 +38,17 @@ function Login() {
     }
   };
 
+  // Navigate to password reset page
   const handleForgotPassword = () => {
     navigate('/reset');
   };
 
   return (
     <div className="login-wrapper">
+      {/* Side image panel for visual design */}
       <div className="image-side"></div>
+
+      {/* Login form container */}
       <div className="form-side">
         <div className="login-container">
           <h2>Login</h2>
@@ -67,6 +73,7 @@ function Login() {
 
           <button onClick={handleLogin}>Login</button>
           
+          {/* Link to password reset */}
           <button 
             type="button" 
             className="forgot-password-btn"
@@ -75,6 +82,7 @@ function Login() {
             Forgot Password?
           </button>
           
+          {/* Link to sign up page */}
           <p className="signup-link">
             Don't have an account? <a href="/signup">Sign up here</a>
           </p>

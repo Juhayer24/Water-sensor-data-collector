@@ -1,4 +1,4 @@
-/* Remove body flex for global compatibility */
+/* Basic reset and global body style */
 body {
   margin: 0;
   padding: 0;
@@ -7,7 +7,7 @@ body {
   background: linear-gradient(to right, #eaf6ff, #ffffff);
 }
 
-/* Wrapper that contains both image and form */
+/* Full-page wrapper that holds the image and the form side-by-side */
 .login-wrapper {
   display: flex;
   flex-direction: row;
@@ -16,7 +16,7 @@ body {
   min-height: 100vh;
 }
 
-/* Left side - Image */
+/* Left side of the screen with background image */
 .image-side {
   flex: 1 1 50%;
   min-width: 0;
@@ -25,7 +25,7 @@ body {
   background-size: cover;
 }
 
-/* Right side - Form */
+/* Right side that contains the login/signup form */
 .form-side {
   flex: 1 1 50%;
   min-width: 0;
@@ -36,7 +36,7 @@ body {
   background: linear-gradient(to right, #eaf6ff, #ffffff);
 }
 
-/* Login/Signup box */
+/* Container for the login/signup box */
 .login-container {
   background-color: #ffffff;
   padding: 40px 30px;
@@ -46,13 +46,13 @@ body {
   text-align: center;
 }
 
-/* Heading */
+/* Heading inside the form */
 .login-container h2 {
   margin-bottom: 24px;
   color: #007acc;
 }
 
-/* Labels */
+/* Labels for input fields */
 .login-container label {
   display: block;
   text-align: left;
@@ -61,7 +61,7 @@ body {
   color: #333;
 }
 
-/* Inputs */
+/* Text input fields */
 .login-container input {
   width: 100%;
   padding: 10px 12px;
@@ -71,13 +71,14 @@ body {
   transition: border-color 0.3s ease;
 }
 
+/* Input focus effect */
 .login-container input:focus {
   border-color: #007acc;
   outline: none;
   box-shadow: 0 0 5px rgba(0, 122, 204, 0.3);
 }
 
-/* Button */
+/* Submit/login button styling */
 .login-container button {
   margin-top: 20px;
   width: 100%;
@@ -92,27 +93,31 @@ body {
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Button hover effect */
 .login-container button:hover {
   background: linear-gradient(135deg, #005f99, #003d66);
   box-shadow: 0 4px 12px rgba(0, 122, 204, 0.4);
 }
 
-/* Responsive: stack on smaller screens */
+/* Responsive layout: stack image and form on smaller screens */
 @media (max-width: 900px) {
   .login-wrapper {
     flex-direction: column;
   }
-  .image-side, .form-side {
+
+  .image-side,
+  .form-side {
     min-height: 40vh;
     flex: none;
     width: 100vw;
   }
+
   .form-side {
     min-height: 60vh;
   }
 }
-/* Add this to your existing login.css file */
 
+/* Forgot Password button styling */
 .forgot-password-btn {
   margin-top: 15px;
   width: 100%;
@@ -127,6 +132,7 @@ body {
   transition: all 0.3s ease;
 }
 
+/* Hover state for Forgot Password button */
 .forgot-password-btn:hover {
   background: #007acc;
   color: white;
