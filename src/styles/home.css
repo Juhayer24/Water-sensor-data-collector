@@ -4,8 +4,8 @@
   width: 100vw; /* Take full width of the viewport */
   max-width: 100%;
   overflow: hidden; /* Hide logos as they scroll outside the container */
-  margin-top: 18px;
-  margin-bottom: 18px;
+  margin-top: 50px;
+  margin-bottom: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,7 +40,173 @@
   }
 }
 
+/* Features Section - What this system does */
+.features-section {
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #f8fbff 0%, #eaf6ff 100%);
+  margin: 40px 0;
+}
+
+.section-title {
+  text-align: center;
+  font-family: 'Montserrat', 'Inter', 'Poppins', 'Segoe UI', sans-serif;
+  font-weight: 700;
+  font-size: 2.2em;
+  color: #007acc;
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #007acc, #00c6fb);
+  border-radius: 2px;
+}
+
+.features-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 122, 204, 0.08);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(0, 122, 204, 0.1);
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(0, 122, 204, 0.15);
+}
+
+.feature-icon {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #eaf6ff 0%, #d6f0ff 100%);
+  border-radius: 50%;
+  margin: 0 auto 20px;
+}
+
+.feature-card h3 {
+  font-family: 'Montserrat', 'Inter', 'Poppins', 'Segoe UI', sans-serif;
+  font-weight: 600;
+  font-size: 1.3em;
+  color: #007acc;
+  margin-bottom: 15px;
+}
+
+.feature-card p {
+  font-family: 'Inter', 'Poppins', 'Segoe UI', sans-serif;
+  font-size: 1em;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Benefits Section - Why use it */
+.benefits-section {
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+  margin: 40px 0;
+}
+
+.benefits-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.benefit-card {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 198, 251, 0.08);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(0, 198, 251, 0.1);
+}
+
+.benefit-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(0, 198, 251, 0.15);
+}
+
+.benefit-icon {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #e6f9ff 0%, #ccf4ff 100%);
+  border-radius: 50%;
+  margin: 0 auto 20px;
+}
+
+.benefit-card h3 {
+  font-family: 'Montserrat', 'Inter', 'Poppins', 'Segoe UI', sans-serif;
+  font-weight: 600;
+  font-size: 1.3em;
+  color: #00c6fb;
+  margin-bottom: 15px;
+}
+
+.benefit-card p {
+  font-family: 'Inter', 'Poppins', 'Segoe UI', sans-serif;
+  font-size: 1em;
+  color: #555;
+  line-height: 1.6;
+}
+
 /* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .features-section, .benefits-section {
+    padding: 40px 15px;
+  }
+
+  .section-title {
+    font-size: 1.8em;
+    margin-bottom: 30px;
+  }
+
+  .features-container, .benefits-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .feature-card, .benefit-card {
+    padding: 30px 20px;
+  }
+
+  .feature-icon, .benefit-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .feature-icon svg, .benefit-icon svg {
+    width: 36px;
+    height: 36px;
+  }
+}
+
 @media (max-width: 700px) {
   .tech-logo {
     height: 36px;
@@ -51,3 +217,28 @@
     gap: 32px; /* Reduce spacing between logos on small devices */
   }
 }
+
+/* Animation for smooth entrance */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.feature-card, .benefit-card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Staggered animation delay */
+.feature-card:nth-child(1) { animation-delay: 0.1s; }
+.feature-card:nth-child(2) { animation-delay: 0.2s; }
+.feature-card:nth-child(3) { animation-delay: 0.3s; }
+
+.benefit-card:nth-child(1) { animation-delay: 0.1s; }
+.benefit-card:nth-child(2) { animation-delay: 0.2s; }
+.benefit-card:nth-child(3) { animation-delay: 0.3s; }
