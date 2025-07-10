@@ -72,7 +72,7 @@ function Home() {
         </button>
         {menuOpen && (
           <div className="nav-dropdown">
-            <button onClick={handleLogout}>Logout</button>
+            <button className="nav-dropdown-link" onClick={handleLogout}>Logout</button>
             <a href="/help" className="nav-dropdown-link">Help</a>
           </div>
         )}
