@@ -1,0 +1,109 @@
+/*
+  Help container styling: sets max width, centers content, and applies card-like UI
+*/
+.help-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 32px 20px;
+  background: #f8fbff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0, 122, 204, 0.08);
+}
+
+/* Title for the Help section */
+.help-title {
+  text-align: center;
+  font-family: 'Montserrat', 'Inter', 'Segoe UI', sans-serif;
+  font-size: 2em;
+  color: #007acc;
+  margin-bottom: 32px;
+  font-weight: 700;
+}
+
+/* Container for all FAQ items */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Each individual FAQ item */
+.faq-item {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 122, 204, 0.06);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+/* Shadow enhancement on hover for visual feedback */
+.faq-item:hover {
+  box-shadow: 0 4px 24px rgba(0, 122, 204, 0.12);
+}
+
+/* Button for FAQ questions */
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  font-family: 'Montserrat', 'Inter', 'Segoe UI', sans-serif;
+  font-size: 1.1em;
+  color: #007acc;
+  padding: 20px 18px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+/* Change background when question is open */
+.faq-question.open {
+  background: #eaf6ff;
+}
+
+/* Arrow icon beside the question */
+.faq-arrow {
+  font-size: 1.2em;
+  margin-left: 10px;
+  color: #00c6fb;
+  transition: transform 0.2s;
+}
+
+/* Answer section (collapsed by default) */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  background: #f4faff;
+  color: #333;
+  font-size: 1em;
+  padding: 0 18px;
+  transition: max-height 0.3s ease, padding 0.3s;
+}
+
+/* Show the answer when active */
+.faq-answer.show {
+  max-height: 200px;
+  padding: 16px 18px 20px 18px;
+}
+
+/* Footer text under FAQ */
+.help-footer {
+  margin-top: 36px;
+  text-align: center;
+  color: #888;
+  font-size: 0.98em;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+  .help-container {
+    padding: 16px 4px;
+  }
+  .help-title {
+    font-size: 1.3em;
+  }
+}
