@@ -7,6 +7,7 @@ from PIL import Image
 import time
 import threading
 from bson.objectid import ObjectId
+from ml_scripts import get_inference
 
 app = Flask(__name__)
 CORS(app)
@@ -62,7 +63,10 @@ def sending_data(stoping, duration, frequency):
 
             response = requests.post(url, json=data, headers=headers)
             image = decode_image(encoded_img=response.json()['image'])
-            image.save(f"images/image_{i}.png")
+            result = get_inference(image)
+
+            if result != "Clean":
+                return result
                 
                 #turn off LED
 
