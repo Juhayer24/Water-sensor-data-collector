@@ -162,10 +162,10 @@ function Run() {
 
       {/* Main content container */}
       <div className="container">
-        <h2>Capture Images from Your System</h2>
+        <h2 style={{ color: '#43a047' }}>Capture Images from Your System</h2>
 
         {/* System selection dropdown */}
-        <label htmlFor="system">Select System:</label>
+        <label htmlFor="system" style={{ color: '#2e7031' }}>Select System:</label>
         <div className="input-row">
           <select id="system">
             {systems.length === 0 ? (
@@ -181,7 +181,7 @@ function Run() {
 
         {/* Duration input */}
         <div className="input-group">
-          <label htmlFor="duration">Duration of Sampling:</label>
+          <label htmlFor="duration" style={{ color: '#2e7031' }}>Duration of Sampling:</label>
           <div className="input-with-select">
             <input 
               type="number" 
@@ -207,7 +207,7 @@ function Run() {
 
         {/* Sampling interval input */}
         <div className="input-group">
-          <label htmlFor="sampling-interval">Sampling Interval:</label>
+          <label htmlFor="sampling-interval" style={{ color: '#2e7031' }}>Sampling Interval:</label>
           <div className="input-with-select">
             <input 
               type="number" 
@@ -233,7 +233,7 @@ function Run() {
 
         {/* Display estimated number of pictures */}
         <div className="picture-count-row">
-          <span id="pictureCount">Total Pictures: {pictureCount}</span>
+          <span id="pictureCount" style={{ color: '#43a047', fontWeight: 600 }}>Total Pictures: {pictureCount}</span>
         </div>
 
         {/* Action buttons */}
@@ -244,7 +244,7 @@ function Run() {
         </div>
 
         {/* System status */}
-        <p id="notice">{notice}</p>
+        <p id="notice" style={{ color: '#43a047', fontWeight: 600 }}>{notice}</p>
       </div>
 
       {/* Popup to add a new system */}

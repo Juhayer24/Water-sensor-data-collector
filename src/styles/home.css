@@ -1,3 +1,14 @@
+/* Agriculture green theme */
+:root {
+  --theme-main: #43a047;
+  --theme-dark: #2e7031;
+  --theme-accent: #b36aff;
+}
+
+body {
+  background: linear-gradient(135deg, #eaf6ff 0%, #e6ffe6 100%);
+}
+
 /* Container for the scrolling row of tech logos */
 .tech-logos-bar {
   position: relative;
@@ -9,7 +20,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background: linear-gradient(135deg, #f8fbff 0%, #e6ffe6 100%);
   min-height: 70px; /* Ensures consistent height */
 }
 
@@ -43,7 +54,7 @@
 /* Features Section - What this system does */
 .features-section {
   padding: 60px 20px;
-  background: linear-gradient(135deg, #f8fbff 0%, #eaf6ff 100%);
+  background: none;
   margin: 40px 0;
 }
 
@@ -52,7 +63,7 @@
   font-family: 'Montserrat', 'Inter', 'Poppins', 'Segoe UI', sans-serif;
   font-weight: 700;
   font-size: 2.2em;
-  color: #007acc;
+  color: var(--theme-main);
   margin-bottom: 50px;
   position: relative;
 }
@@ -69,22 +80,30 @@
   border-radius: 2px;
 }
 
-.features-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto;
+.features-container, .benefits-container {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 24px;
+  justify-content: center;
+  align-items: stretch;
 }
 
-.feature-card {
-  background: white;
-  padding: 40px 30px;
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 122, 204, 0.08);
-  text-align: center;
+.feature-card, .benefit-card {
+  flex: 1 1 0;
+  min-width: 220px;
+  max-width: 340px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(67, 160, 71, 0.08);
+  padding: 24px 18px;
+  color: #43a047;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 1px solid rgba(0, 122, 204, 0.1);
+  text-align: center;
 }
 
 .feature-card:hover {
@@ -104,41 +123,51 @@
   margin: 0 auto 20px;
 }
 
+.feature-icon svg {
+  stroke: #a5d6a7;
+}
+
 .feature-card h3 {
   font-family: 'Montserrat', 'Inter', 'Poppins', 'Segoe UI', sans-serif;
   font-weight: 600;
   font-size: 1.3em;
-  color: #007acc;
+  color: #43a047;
   margin-bottom: 15px;
 }
 
 .feature-card p {
   font-family: 'Inter', 'Poppins', 'Segoe UI', sans-serif;
   font-size: 1em;
-  color: #555;
+  color: #2e7031;
   line-height: 1.6;
 }
 
 /* Benefits Section - Why use it */
 .benefits-section {
   padding: 60px 20px;
-  background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+  background: linear-gradient(135deg, #e6ffe6 0%, #e6ffe6 100%);
+  border-radius: 18px;
   margin: 40px 0;
 }
 
 .benefits-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 24px;
+  justify-content: center;
+  align-items: stretch;
 }
 
 .benefit-card {
-  background: white;
-  padding: 40px 30px;
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 198, 251, 0.08);
+  flex: 1 1 0;
+  min-width: 220px;
+  max-width: 340px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(67, 198, 251, 0.08);
+  padding: 24px 18px;
+  color: #43a047;
+  font-weight: 600;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 1px solid rgba(0, 198, 251, 0.1);
@@ -161,18 +190,22 @@
   margin: 0 auto 20px;
 }
 
+.benefit-icon svg {
+  stroke: #a5d6a7;
+}
+
 .benefit-card h3 {
   font-family: 'Montserrat', 'Inter', 'Poppins', 'Segoe UI', sans-serif;
   font-weight: 600;
   font-size: 1.3em;
-  color: #00c6fb;
+  color: #43a047;
   margin-bottom: 15px;
 }
 
 .benefit-card p {
   font-family: 'Inter', 'Poppins', 'Segoe UI', sans-serif;
   font-size: 1em;
-  color: #555;
+  color: #2e7031;
   line-height: 1.6;
 }
 
@@ -188,7 +221,7 @@
   }
 
   .features-container, .benefits-container {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     gap: 20px;
   }
 
@@ -215,6 +248,16 @@
 
   .tech-logos-track {
     gap: 32px; /* Reduce spacing between logos on small devices */
+  }
+}
+
+@media (max-width: 900px) {
+  .features-container, .benefits-container {
+    flex-wrap: wrap;
+  }
+  .feature-card, .benefit-card {
+    min-width: 180px;
+    max-width: 100%;
   }
 }
 

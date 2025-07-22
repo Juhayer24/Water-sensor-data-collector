@@ -1,6 +1,28 @@
 /* Got the layout from login.css for consistent sizing */
 @import url('./login.css');
 
+:root {
+  --theme-main: #43a047;
+  --theme-dark: #2e7031;
+  --theme-accent: #b36aff;
+}
+
+.signup-container h2 {
+  color: var(--theme-main);
+}
+
+input, button {
+  border-color: var(--theme-main);
+}
+
+button[type="submit"] {
+  background: linear-gradient(135deg, var(--theme-main), var(--theme-dark));
+}
+
+button[type="submit"]:hover {
+  background: linear-gradient(135deg, var(--theme-dark), #1b5e20);
+}
+
 .signup-link {
   text-align: center;
   margin-top: 18px;
