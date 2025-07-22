@@ -1,10 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;700&display=swap');
 
+/* Define color variables for the theme */
+:root {
+  --theme-main: #43a047; /* Agriculture green */
+  --theme-dark: #2e7031;
+  --theme-accent: #f9a825; /* yellow accent for green theme */
+}
+
 /* Set global font, layout, and background styling */
 body {
   font-family: 'Inter', 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  background: linear-gradient(120deg, #eaf6ff 0%, #f7e8ff 100%);
+  background: var(--theme-bg-gradient);
   color: #000;
   min-height: 100vh;
   transition: background 0.7s cubic-bezier(0.4, 0, 0.2, 1);
@@ -22,7 +29,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Montserrat', 'Inter', sans-serif;
   letter-spacing: 1px;
   font-weight: 700;
-  color: #007acc;
+  color: #2e7031;
   animation: titlePopIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -36,7 +43,7 @@ h1, h2, h3, h4, h5, h6 {
 nav {
   background-color: #ffffff;
   padding: 34px 24px;
-  box-shadow: 0 8px 32px rgba(0, 122, 204, 0.08);
+  box-shadow: 0 8px 32px rgba(67, 160, 71, 0.08);
   display: flex;
   align-items: center;
   position: sticky;
@@ -64,12 +71,12 @@ nav {
   background: none;
   border: none;
   z-index: 101;
-  color: #007acc;
+  color: var(--theme-main);
   transition: color 0.2s;
 }
 
 .nav-hamburger:hover {
-  color: #005f99;
+  color: var(--theme-dark);
 }
 
 /* Centers nav links horizontally */
@@ -103,7 +110,7 @@ nav {
 .nav-dropdown button, .nav-dropdown a {
   background: none;
   border: none;
-  color: #007acc;
+  color: #2e7031;
   text-align: left;
   padding: 10px 18px;
   font-size: 1em;
@@ -113,8 +120,8 @@ nav {
 }
 
 .nav-dropdown button:hover, .nav-dropdown a:hover {
-  background: #eaf6ff;
-  color: #005f99;
+  background: #e6ffe6;
+  color: #43a047;
 }
 
 /* Make Logout button bold and add underline effect on hover */
@@ -132,7 +139,7 @@ nav {
   bottom: 0;
   width: 0;
   height: 3px;
-  background: linear-gradient(90deg, #007acc, #b36aff);
+  background: linear-gradient(90deg, #43a047, #f9a825);
   transition: width 0.3s, left 0.3s;
 }
 
@@ -165,7 +172,7 @@ nav a::after {
   bottom: 0;
   width: 0;
   height: 3px;
-  background: linear-gradient(90deg, #007acc, #b36aff);
+  background: linear-gradient(90deg, var(--theme-main), var(--theme-accent));
   transition: width 0.3s, left 0.3s;
 }
 
@@ -230,7 +237,7 @@ nav a:hover::after {
 }
 
 .close-button:hover {
-  color: #007acc;
+  color: var(--theme-main);
 }
 
 /* Paragraphs inside popups */
@@ -254,8 +261,8 @@ nav a:hover::after {
 /* Input focus style */
 .popup-content input:focus {
   outline: none;
-  border-color: #007acc;
-  box-shadow: 0 0 5px rgba(0, 122, 204, 0.3);
+  border-color: var(--theme-main);
+  box-shadow: 0 0 5px rgba(79, 209, 197, 0.3);
 }
 
 /* Aligns buttons or other elements to the right side of nav */
@@ -270,14 +277,14 @@ nav a:hover::after {
 
 /* Styling for buttons on the right side of nav */
 .nav-right button {
-  background: linear-gradient(135deg, #007acc, #005f99);
-  color: white;
+  background: linear-gradient(135deg, #43a047, #2e7031);
+  color: #fff;
   border: none;
   padding: 10px 16px;
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0, 122, 204, 0.3);
+  box-shadow: 0 4px 10px rgba(67, 160, 71, 0.3);
   transition: background 0.3s ease;
   font-family: 'Montserrat', 'Inter', sans-serif;
   font-weight: 700;
@@ -285,7 +292,7 @@ nav a:hover::after {
 }
 
 .nav-right button:hover {
-  background: linear-gradient(135deg, #005f99, #003d66);
+  background: linear-gradient(135deg, #2e7031, #43a047);
 }
 
 /* Shared button styles across multiple components */
@@ -293,7 +300,7 @@ nav a:hover::after {
   font-family: 'Montserrat', 'Inter', sans-serif;
   font-weight: 700;
   letter-spacing: 0.5px;
-  box-shadow: 0 6px 24px rgba(0, 122, 204, 0.13);
+  box-shadow: 0 6px 24px rgba(67, 160, 71, 0.13);
   transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
   animation: buttonFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -314,4 +321,20 @@ input, select {
 /* Add glow effect when focused */
 input:focus, select:focus {
   box-shadow: 0 0 8px #b36aff33;
+}
+
+/* Add System button specific styles */
+.add-system-btn {
+  background: linear-gradient(135deg, #43a047, #2e7031);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  padding: 12px 24px;
+  box-shadow: 0 4px 12px rgba(67, 160, 71, 0.13);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.add-system-btn:hover {
+  background: linear-gradient(135deg, #2e7031, #43a047);
 }
