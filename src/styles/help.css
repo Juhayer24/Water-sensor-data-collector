@@ -5,9 +5,9 @@
   max-width: 700px;
   margin: 40px auto;
   padding: 32px 20px;
-  background: #f8fbff;
+  background: #f8fff9;
   border-radius: 18px;
-  box-shadow: 0 8px 32px rgba(0, 122, 204, 0.08);
+  box-shadow: 0 8px 32px rgba(67, 160, 71, 0.08);
 }
 
 /* Title for the Help section */
@@ -15,7 +15,7 @@
   text-align: center;
   font-family: 'Montserrat', 'Inter', 'Segoe UI', sans-serif;
   font-size: 2em;
-  color: #007acc;
+  color: #43a047;
   margin-bottom: 32px;
   font-weight: 700;
 }
@@ -31,14 +31,14 @@
 .faq-item {
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 122, 204, 0.06);
+  box-shadow: 0 2px 12px rgba(67, 160, 71, 0.06);
   overflow: hidden;
   transition: box-shadow 0.2s;
 }
 
 /* Shadow enhancement on hover for visual feedback */
 .faq-item:hover {
-  box-shadow: 0 4px 24px rgba(0, 122, 204, 0.12);
+  box-shadow: 0 4px 24px rgba(67, 160, 71, 0.12);
 }
 
 /* Button for FAQ questions */
@@ -49,7 +49,7 @@
   outline: none;
   font-family: 'Montserrat', 'Inter', 'Segoe UI', sans-serif;
   font-size: 1.1em;
-  color: #007acc;
+  color: #43a047;
   padding: 20px 18px;
   text-align: left;
   cursor: pointer;
@@ -62,14 +62,14 @@
 
 /* Change background when question is open */
 .faq-question.open {
-  background: #eaf6ff;
+  background: #e6ffe6;
 }
 
 /* Arrow icon beside the question */
 .faq-arrow {
   font-size: 1.2em;
   margin-left: 10px;
-  color: #00c6fb;
+  color: #2e7031;
   transition: transform 0.2s;
 }
 
@@ -77,8 +77,8 @@
 .faq-answer {
   max-height: 0;
   overflow: hidden;
-  background: #f4faff;
-  color: #333;
+  background: #f4fff4;
+  color: #2e7031;
   font-size: 1em;
   padding: 0 18px;
   transition: max-height 0.3s ease, padding 0.3s;
