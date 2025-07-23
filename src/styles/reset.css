@@ -1,10 +1,10 @@
-/* Reset page styles  */
+/* Reset page styles */
 body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   min-height: 100vh;
-  background: linear-gradient(to right, #eaf6ff, #ffffff);
+  background: linear-gradient(135deg, #f0fff0 0%, #c8e6c9 100%);
 }
 
 /* Wrapper that contains both image and form */
@@ -33,7 +33,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to right, #eaf6ff, #ffffff);
+  background: linear-gradient(135deg, #f0fff0 0%, #c8e6c9 100%);
 }
 
 /* Reset box */
@@ -48,8 +48,8 @@ body {
 
 /* Heading */
 .reset-step h2 {
-  margin-bottom: 16px;
-  color: #007acc;
+  margin-bottom: 24px;
+  color: var(--theme-main);
   font-size: 1.8rem;
 }
 
@@ -73,7 +73,7 @@ body {
 .reset-step input {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--theme-main);
   border-radius: 6px;
   font-size: 15px;
   transition: border-color 0.3s ease;
@@ -81,9 +81,9 @@ body {
 }
 
 .reset-step input:focus {
-  border-color: #007acc;
+  border-color: #43a047;
   outline: none;
-  box-shadow: 0 0 5px rgba(0, 122, 204, 0.3);
+  box-shadow: 0 0 5px rgba(67, 160, 71, 0.3);
 }
 
 .reset-step input:disabled {
@@ -96,7 +96,7 @@ body {
   margin-top: 20px;
   width: 100%;
   padding: 12px;
-  background: linear-gradient(135deg, #007acc, #005f99);
+  background: linear-gradient(135deg, var(--theme-main), var(--theme-dark));
   border: none;
   border-radius: 6px;
   color: #fff;
@@ -108,8 +108,8 @@ body {
 }
 
 .reset-step button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #005f99, #003d66);
-  box-shadow: 0 4px 12px rgba(0, 122, 204, 0.4);
+  background: linear-gradient(135deg, var(--theme-dark), #1b5e20);
+  box-shadow: 0 4px 12px rgba(67, 160, 71, 0.4);
 }
 
 .reset-step button:disabled {
@@ -121,15 +121,15 @@ body {
 /* Back button */
 .back-btn {
   background: transparent !important;
-  color: #007acc !important;
-  border: 2px solid #007acc !important;
+  color: var(--theme-main) !important;
+  border: 2px solid var(--theme-main) !important;
   margin-top: 10px;
 }
 
 .back-btn:hover:not(:disabled) {
-  background: #007acc !important;
+  background: var(--theme-main) !important;
   color: white !important;
-  box-shadow: 0 4px 12px rgba(0, 122, 204, 0.4) !important;
+  box-shadow: 0 4px 12px rgba(67, 160, 71, 0.4) !important;
 }
 
 /* Message styles */
@@ -166,4 +166,11 @@ body {
   .form-side {
     min-height: 60vh;
   }
+}
+
+/* Theme colors */
+:root {
+  --theme-main: #43a047;
+  --theme-dark: #2e7031;
+  --theme-accent: #b36aff;
 }

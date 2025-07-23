@@ -34,14 +34,14 @@
 
 /* Styling for each button inside the row */
 .button-row button {
-  background: linear-gradient(135deg, #007acc, #005f99);
+  background: linear-gradient(135deg, #43a047, #2e7031);
   color: #fff;
   border: none;
   padding: 12px 28px;
   border-radius: 8px;
   font-size: 1.08em;
   font-weight: 600;
-  box-shadow: 0 4px 16px rgba(0, 122, 204, 0.13);
+  box-shadow: 0 4px 16px rgba(67, 160, 71, 0.13);
   transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
   letter-spacing: 0.5px;
@@ -50,14 +50,14 @@
 
 /* Button hover animation */
 .button-row button:hover {
-  background: linear-gradient(135deg, #005f99, #003d66);
+  background: linear-gradient(135deg, #2e7031, #1b5e20);
   transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 8px 24px rgba(0, 122, 204, 0.18);
+  box-shadow: 0 8px 24px rgba(67, 160, 71, 0.18);
 }
 
 /* Button click effect */
 .button-row button:active {
-  background: linear-gradient(135deg, #007acc, #005f99);
+  background: linear-gradient(135deg, #43a047, #2e7031);
   transform: scale(0.98);
 }
 
@@ -122,7 +122,7 @@
   border: 1px solid #b3d8f7;
   border-radius: 6px;
   background: #f7fbff;
-  color: #005f99;
+  color: #2cb35b;
   transition: border-color 0.3s;
   cursor: pointer;
 }
@@ -179,7 +179,7 @@
 /* Add System button styling */
 .add-system-btn {
   margin-top: 12px;
-  background: linear-gradient(135deg, #007acc, #005f99);
+  background: linear-gradient(135deg, #43a047, #2e7031);
   color: white;
   border: none;
   padding: 10px 16px;
@@ -193,16 +193,16 @@
 
 /* Add System hover effect */
 .add-system-btn:hover {
-  background: linear-gradient(135deg, #005f99, #003d66);
+  background: linear-gradient(135deg, #39b03b, #36b638);
 }
 
 /* Custom select styling inside the form */
 select#system {
   padding: 8px 12px;
   border-radius: 6px;
-  border: 1px solid #b3d8f7;
-  background: #f7fbff;
-  color: #005f99;
+  border: 1px solid #43a047;
+  background: #f7fff7;
+  color: #2e7031;
   font-size: 15px;
   min-width: 160px;
   flex: 1;
@@ -245,7 +245,7 @@ select#system {
 
 /* Close button hover effect */
 .close-button:hover {
-  color: #007acc;
+  color: #4cd360;
 }
 
 /* Mobile responsiveness */
