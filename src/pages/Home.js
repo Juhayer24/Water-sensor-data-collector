@@ -79,6 +79,7 @@ function Home() {
         <div className="nav-center">
           <a href="/home">Home</a>
           <a href="/run">Take Images</a>
+          <a href="/data">Data</a>
           <a href="/profile">Profile</a>
         </div>
         <div className="nav-right">
